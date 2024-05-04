@@ -7,7 +7,12 @@ import ImageProcessing.Fourier.Fourier;
 
 public class GlobalLinearFiltering {
     
-    public static int[][] idealLowPassFilter(int[][] image, int cutOffFrequency){
+    /*
+    ----------------------------
+    Global Ideal Low Pass Filter
+    ----------------------------
+    */
+    public static int[][] idealLowPassFilter(int[][] image, int cutOffFrequency) {
         // Image to double -> arg of Fourier2D
         double[][] imageDouble = new double[image.length][image[0].length];
         for (int i = 0; i < image.length; i++) { // https://cplusplus.com/forum/beginner/188240/
@@ -30,7 +35,7 @@ public class GlobalLinearFiltering {
         for (int u = 0; u < M; u++) { 
             for (int v = 0; v < N; v++) {
 //                double D = Math.sqrt(u * u + v * v); // Fonctionne pas ???
-                double D = Math.sqrt((u - M / 2) * (u - M / 2) + (v - N / 2) * (v - N / 2)); // Dans la littérature ??? Sinon ne fonctionne pas
+                double D = Math.sqrt((u - M / 2) * (u - M / 2) + (v - N / 2) * (v - N / 2)); // Dans la littérature ??? Sinon kaput
                 if (D <= cutOffFrequency) { // BW filter
                     H[u][v] = 1;
                 } else {
@@ -60,7 +65,116 @@ public class GlobalLinearFiltering {
                 imageFiltered[u][v] = (int) Math.round(realPart[u][v]);
             }
         }
+        
+        // !!! Error: Valeur du niveau de gris invalide !!!
+        for (int u = 0; u < M; u++) {
+            for (int v = 0; v < N; v++) {
+                int value = (int) Math.round(realPart[u][v]);
+                if (value < 0) value = 0;
+                if (value > 255) value = 255;
+                imageFiltered[u][v] = value;
+            }
+        }
    
+        return imageFiltered;
+    }
+    
+     /*
+    -----------------------------
+    Global Ideal High Pass Filter
+    -----------------------------
+    */
+    public static int[][] idealHighPassFilter(int[][] image, int cutOffFrequency) {
+        // Convert image in double
+        double[][] imageDouble = imageToDouble(image);
+        
+        // Fourier Transform and center (cross cross ...)
+        MatriceComplexe F = Fourier.Fourier2D(imageDouble);
+        MatriceComplexe crossCrossF = Fourier.decroise(F);
+        
+        // Ideal High Pass Filter
+        int M = F.getLignes();
+        int N = F.getColonnes();
+        double[][] H = new double[M][N]; // H(u,v)
+
+        for (int u = 0; u < M; u++) { 
+            for (int v = 0; v < N; v++) {
+                double D = Math.sqrt((u - M / 2) * (u - M / 2) + (v - N / 2) * (v - N / 2)); // Sinon Kaput 
+                if (D >= cutOffFrequency) { // BW filter
+                    H[u][v] = 1;
+                } else {
+                    H[u][v] = 0;
+                }
+            }
+        }
+        
+        // Apply filter
+        crossCrossF = applyFilter(crossCrossF, H, M, N);
+        MatriceComplexe unCrossCrossF = Fourier.decroise(crossCrossF);
+        
+        // Inverse Fourier Transform
+        MatriceComplexe inverseFourier = Fourier.InverseFourier2D(unCrossCrossF);
+        
+        // Image Filtered
+        int[][] imageFiltered = toDoubleToInt(inverseFourier, M, N);
+   
+        return imageFiltered;
+    }
+    
+    /*
+    ---------------
+    Image To Double
+    ---------------
+    */
+    static double[][] imageToDouble(int[][] image) {
+        double[][] imageDouble = new double[image.length][image[0].length];
+        for (int i = 0; i < image.length; i++) { // https://cplusplus.com/forum/beginner/188240/
+            for (int j = 0; j < image[0].length; j++) {
+                imageDouble[i][j] = (double) image[i][j];
+            }
+        }
+        return imageDouble;
+    }
+    
+    /*
+    ------------
+    Apply Filter
+    ------------
+    */
+    static MatriceComplexe applyFilter(MatriceComplexe crossCrossF, double[][] H, int M, int N) {
+//        int M = H.length; // https://www.codingrooms.com/blog/2d-array-length-java
+//        int N = H[0].length;
+        for (int u = 0; u < M; u++) {
+            for (int v = 0; v < N; v++) {
+                double realPart = crossCrossF.getPartieReelle()[u][v] * H[u][v];
+                double imaginaryPart = crossCrossF.getPartieImaginaire()[u][v] * H[u][v];
+                crossCrossF.set(u, v, realPart, imaginaryPart);
+            }
+        }
+        return crossCrossF;
+    }
+    
+    /*
+    ----------------
+    To Double To int
+    ----------------
+    */
+    static int[][] toDoubleToInt(MatriceComplexe inverseFourier, int M, int N) {
+        int[][] imageFiltered = new int[M][N];
+        double[][] realPart = inverseFourier.getPartieReelle(); // Hope Imaginary part ~= 0
+
+        for (int u = 0; u < M; u++) {
+            for (int v = 0; v < N; v++) {
+                int value = (int) Math.round(realPart[u][v]);
+
+                // Value between 0 and 255 !!!
+                if (value < 0) value = 0;
+                if (value > 255) value = 255;
+
+                // Correct
+                imageFiltered[u][v] = value;
+            }
+        }
         return imageFiltered;
     }
 }
