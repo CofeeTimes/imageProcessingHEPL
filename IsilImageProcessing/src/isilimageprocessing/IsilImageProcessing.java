@@ -7,6 +7,7 @@ import CImage.Observers.Events.*;
 import ImageProcessing.Complexe.MatriceComplexe;
 import ImageProcessing.Fourier.Fourier;
 import ImageProcessing.Histogramme.Histogramme;
+import ImageProcessing.Linear.GlobalLinearFiltering;
 import isilimageprocessing.Dialogues.*;
 import java.awt.*;
 import java.io.*;
@@ -68,6 +69,7 @@ public class IsilImageProcessing extends javax.swing.JFrame implements ClicListe
     private void initComponents() {
 
         buttonGroupDessiner = new javax.swing.ButtonGroup();
+        jPopupMenu1 = new javax.swing.JPopupMenu();
         jScrollPane = new javax.swing.JScrollPane();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenuImage = new javax.swing.JMenu();
@@ -97,6 +99,10 @@ public class IsilImageProcessing extends javax.swing.JFrame implements ClicListe
         jMenuItemFourierAfficherPartieImaginaire = new javax.swing.JMenuItem();
         jMenuHistogramme = new javax.swing.JMenu();
         jMenuHistogrammeAfficher = new javax.swing.JMenuItem();
+        jMenuLinearFiltering = new javax.swing.JMenu();
+        jMenuGlobal = new javax.swing.JMenu();
+        jMenuItemIdealLowPassFilter = new javax.swing.JMenuItem();
+        jMenuItemIdealHighPassFilter = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Isil Image Processing");
@@ -286,6 +292,30 @@ public class IsilImageProcessing extends javax.swing.JFrame implements ClicListe
 
         jMenuBar1.add(jMenuHistogramme);
 
+        jMenuLinearFiltering.setText("Linear Filtering");
+
+        jMenuGlobal.setText("Global");
+
+        jMenuItemIdealLowPassFilter.setText("Ideal low-pass filter");
+        jMenuItemIdealLowPassFilter.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemIdealLowPassFilterActionPerformed(evt);
+            }
+        });
+        jMenuGlobal.add(jMenuItemIdealLowPassFilter);
+
+        jMenuItemIdealHighPassFilter.setText("Ideal high-pass filter");
+        jMenuItemIdealHighPassFilter.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemIdealHighPassFilterActionPerformed(evt);
+            }
+        });
+        jMenuGlobal.add(jMenuItemIdealHighPassFilter);
+
+        jMenuLinearFiltering.add(jMenuGlobal);
+
+        jMenuBar1.add(jMenuLinearFiltering);
+
         setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -294,18 +324,18 @@ public class IsilImageProcessing extends javax.swing.JFrame implements ClicListe
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 464, Short.MAX_VALUE)
+                .addComponent(jScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 543, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 321, Short.MAX_VALUE)
+                .addComponent(jScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 296, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
-        setSize(new java.awt.Dimension(500, 400));
+        setSize(new java.awt.Dimension(569, 400));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -644,6 +674,54 @@ public class IsilImageProcessing extends javax.swing.JFrame implements ClicListe
             }
 	}
     }//GEN-LAST:event_jMenuItemOuvrirRGBActionPerformed
+
+    private void jMenuItemIdealLowPassFilterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemIdealLowPassFilterActionPerformed
+        // TODO add your handling code here:
+        
+        if (imageNG == null) {
+            JOptionPane.showMessageDialog(this, "No grayscale image loaded.", "Error", JOptionPane.ERROR_MESSAGE); // https://mkyong.com/swing/java-swing-how-to-make-a-simple-dialog/
+            return;
+        }
+
+        try {
+            String input = JOptionPane.showInputDialog(this, "Enter cutoff frequency:");
+            if (input != null && !input.isEmpty()) {
+                int cutoffFrequency = Integer.parseInt(input);
+                int[][] mat = imageNG.getMatrice();  // image to int matrix
+                int[][] filteredImage = GlobalLinearFiltering.idealLowPassFilter(mat, cutoffFrequency);
+                imageNG.setMatrice(filteredImage);
+                observer.setCImage(imageNG);      // update image ?
+            }
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(this, "Invalid frequency entered.", "Error", JOptionPane.ERROR_MESSAGE);
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, "Error applying filter: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_jMenuItemIdealLowPassFilterActionPerformed
+
+    private void jMenuItemIdealHighPassFilterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemIdealHighPassFilterActionPerformed
+        // TODO add your handling code here:
+
+        if (imageNG == null) {
+            JOptionPane.showMessageDialog(this, "No grayscale image loaded.", "Error", JOptionPane.ERROR_MESSAGE); // https://mkyong.com/swing/java-swing-how-to-make-a-simple-dialog/
+            return;
+        }
+
+        try {
+            String input = JOptionPane.showInputDialog(this, "Enter cutoff frequency:");
+            if (input != null && !input.isEmpty()) {
+                int cutoffFrequency = Integer.parseInt(input);
+                int[][] mat = imageNG.getMatrice(); // image to int matrix
+                int[][] filteredImage = GlobalLinearFiltering.idealHighPassFilter(mat, cutoffFrequency);
+                imageNG.setMatrice(filteredImage);
+                observer.setCImage(imageNG); // upadted image
+            }
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(this, "Invalid frequency entered.", "Error", JOptionPane.ERROR_MESSAGE);
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, "Error applying filter: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_jMenuItemIdealHighPassFilterActionPerformed
     
     /**
      * @param args the command line arguments
@@ -776,6 +854,7 @@ public class IsilImageProcessing extends javax.swing.JFrame implements ClicListe
     private javax.swing.JMenu jMenuDessiner;
     private javax.swing.JMenu jMenuFourier;
     private javax.swing.JMenu jMenuFourierAfficher;
+    private javax.swing.JMenu jMenuGlobal;
     private javax.swing.JMenu jMenuHistogramme;
     private javax.swing.JMenuItem jMenuHistogrammeAfficher;
     private javax.swing.JMenu jMenuImage;
@@ -785,13 +864,17 @@ public class IsilImageProcessing extends javax.swing.JFrame implements ClicListe
     private javax.swing.JMenuItem jMenuItemFourierAfficherPartieImaginaire;
     private javax.swing.JMenuItem jMenuItemFourierAfficherPartieReelle;
     private javax.swing.JMenuItem jMenuItemFourierAfficherPhase;
+    private javax.swing.JMenuItem jMenuItemIdealHighPassFilter;
+    private javax.swing.JMenuItem jMenuItemIdealLowPassFilter;
     private javax.swing.JMenuItem jMenuItemNouvelleNG;
     private javax.swing.JMenuItem jMenuItemNouvelleRGB;
     private javax.swing.JMenuItem jMenuItemOuvrirNG;
     private javax.swing.JMenuItem jMenuItemOuvrirRGB;
+    private javax.swing.JMenu jMenuLinearFiltering;
     private javax.swing.JMenu jMenuNouvelle;
     private javax.swing.JMenu jMenuOuvrir;
     private javax.swing.JMenuItem jMenuQuitter;
+    private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JScrollPane jScrollPane;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
