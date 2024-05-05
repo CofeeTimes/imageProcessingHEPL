@@ -122,6 +122,82 @@ public class GlobalLinearFiltering {
     }
     
     /*
+    ----------------------------------
+    Global Butterworth Low Pass Filter
+    ----------------------------------
+    */
+    public static int[][] lowPassButterworthFilter(int[][] image, int cutOffFrequency, int order) {
+        // Convert image in double
+        double[][] imageDouble = imageToDouble(image);
+        
+        // Fourier Transform and center (cross cross ...)
+        MatriceComplexe F = Fourier.Fourier2D(imageDouble);
+        MatriceComplexe crossCrossF = Fourier.decroise(F);
+        
+        // Butterworth Low Pass Filter (non-ideal)
+        int M = F.getLignes();
+        int N = F.getColonnes();
+        double[][] H = new double[M][N]; // H(u,v)
+
+        for (int u = 0; u < M; u++) { 
+            for (int v = 0; v < N; v++) {
+                double D = Math.sqrt((u - M / 2) * (u - M / 2) + (v - N / 2) * (v - N / 2)); 
+                H[u][v] = 1 / (1 + Math.pow(D / cutOffFrequency, 2 * order)); // https://www.javatpoint.com/power-of-a-number-in-java
+            }
+        }
+        
+        // Apply
+        crossCrossF = applyFilter(crossCrossF, H, M, N);
+        MatriceComplexe unCrossCrossF = Fourier.decroise(crossCrossF);
+        
+        // Inverse Fourier
+        MatriceComplexe inverseFourier = Fourier.InverseFourier2D(unCrossCrossF);
+        
+        // Filtered
+        int[][] imageFiltered = toDoubleToInt(inverseFourier, M, N);
+   
+        return imageFiltered; 
+    }
+    
+    /*
+    ----------------------------------
+    Global Butterworth High Pass Filter
+    ----------------------------------
+    */
+    public static int[][] highPassButterworthFilter(int[][] image, int cutOffFrequency, int order) {
+        // Convert image in double
+        double[][] imageDouble = imageToDouble(image);
+        
+        // Fourier Transform and center (cross cross ...)
+        MatriceComplexe F = Fourier.Fourier2D(imageDouble);
+        MatriceComplexe crossCrossF = Fourier.decroise(F);
+        
+        // Butterworth Low Pass Filter (non-ideal)
+        int M = F.getLignes();
+        int N = F.getColonnes();
+        double[][] H = new double[M][N]; // H(u,v)
+
+        for (int u = 0; u < M; u++) { 
+            for (int v = 0; v < N; v++) {
+                double D = Math.sqrt((u - M / 2) * (u - M / 2) + (v - N / 2) * (v - N / 2)); 
+                H[u][v] = 1 / (1 + Math.pow(cutOffFrequency / D, 2 * order)); // https://www.javatpoint.com/power-of-a-number-in-java
+            }
+        }
+        
+        // Apply
+        crossCrossF = applyFilter(crossCrossF, H, M, N);
+        MatriceComplexe unCrossCrossF = Fourier.decroise(crossCrossF);
+        
+        // Inverse Fourier
+        MatriceComplexe inverseFourier = Fourier.InverseFourier2D(unCrossCrossF);
+        
+        // Filtered
+        int[][] imageFiltered = toDoubleToInt(inverseFourier, M, N);
+   
+        return imageFiltered; 
+    }
+    
+    /*
     ---------------
     Image To Double
     ---------------
@@ -135,7 +211,7 @@ public class GlobalLinearFiltering {
         }
         return imageDouble;
     }
-    
+        
     /*
     ------------
     Apply Filter
