@@ -103,6 +103,8 @@ public class IsilImageProcessing extends javax.swing.JFrame implements ClicListe
         jMenuGlobal = new javax.swing.JMenu();
         jMenuItemIdealLowPassFilter = new javax.swing.JMenuItem();
         jMenuItemIdealHighPassFilter = new javax.swing.JMenuItem();
+        jMenuItemLowPassButterworthFilter = new javax.swing.JMenuItem();
+        jMenuItemHighPassButterworthFilter = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Isil Image Processing");
@@ -311,6 +313,22 @@ public class IsilImageProcessing extends javax.swing.JFrame implements ClicListe
             }
         });
         jMenuGlobal.add(jMenuItemIdealHighPassFilter);
+
+        jMenuItemLowPassButterworthFilter.setText("Low-pass Butterworth filter");
+        jMenuItemLowPassButterworthFilter.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemLowPassButterworthFilterActionPerformed(evt);
+            }
+        });
+        jMenuGlobal.add(jMenuItemLowPassButterworthFilter);
+
+        jMenuItemHighPassButterworthFilter.setText("High-pass Butterworth filter");
+        jMenuItemHighPassButterworthFilter.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemHighPassButterworthFilterActionPerformed(evt);
+            }
+        });
+        jMenuGlobal.add(jMenuItemHighPassButterworthFilter);
 
         jMenuLinearFiltering.add(jMenuGlobal);
 
@@ -693,7 +711,7 @@ public class IsilImageProcessing extends javax.swing.JFrame implements ClicListe
                 observer.setCImage(imageNG);      // update image ?
             }
         } catch (NumberFormatException ex) {
-            JOptionPane.showMessageDialog(this, "Invalid frequency entered.", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Invalid frequency entered.", "Error", JOptionPane.ERROR_MESSAGE); // String to numeric
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(this, "Error applying filter: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
@@ -722,6 +740,81 @@ public class IsilImageProcessing extends javax.swing.JFrame implements ClicListe
             JOptionPane.showMessageDialog(this, "Error applying filter: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jMenuItemIdealHighPassFilterActionPerformed
+
+    private void jMenuItemLowPassButterworthFilterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemLowPassButterworthFilterActionPerformed
+        // TODO add your handling code here:
+        
+        if (imageNG == null) {
+            JOptionPane.showMessageDialog(this, "No grayscale image loaded.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        JTextField cutoffField = new JTextField(5);
+        JTextField orderField = new JTextField(5);
+
+        JPanel myPanel = new JPanel();
+        myPanel.add(new JLabel("Cutoff frequency:"));
+        myPanel.add(cutoffField);
+        myPanel.add(Box.createHorizontalStrut(15)); // separate
+        myPanel.add(new JLabel("Order:"));
+        myPanel.add(orderField);
+//        myPanel.add(new JLabel("Enter cutoff frequency and order:"));
+
+        try {
+            int confirmChoice = JOptionPane.showConfirmDialog(this, myPanel, "Enter cutoff frequency and order:", JOptionPane.OK_CANCEL_OPTION);
+            if (confirmChoice == JOptionPane.OK_OPTION) {
+                int cutoffFrequency = Integer.parseInt(cutoffField.getText());
+                int order = Integer.parseInt(orderField.getText());
+                
+                int[][] mat = imageNG.getMatrice(); // image to int matrix
+                int[][] filteredImage = GlobalLinearFiltering.lowPassButterworthFilter(mat, cutoffFrequency, order);
+                imageNG.setMatrice(filteredImage);
+                observer.setCImage(imageNG);
+            }
+            
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(this, "Invalid frequency entered.", "Error", JOptionPane.ERROR_MESSAGE);
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, "Error applying filter: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_jMenuItemLowPassButterworthFilterActionPerformed
+
+    private void jMenuItemHighPassButterworthFilterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemHighPassButterworthFilterActionPerformed
+        // TODO add your handling code here:
+        
+        if (imageNG == null) {
+            JOptionPane.showMessageDialog(this, "No grayscale image loaded.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        JTextField cutoffField = new JTextField(5);
+        JTextField orderField = new JTextField(5);
+
+        JPanel myPanel = new JPanel();
+        myPanel.add(new JLabel("Cutoff frequency:"));
+        myPanel.add(cutoffField);
+        myPanel.add(Box.createHorizontalStrut(15)); // separate
+        myPanel.add(new JLabel("Order:"));
+        myPanel.add(orderField);
+
+        try {
+            int confirmChoice = JOptionPane.showConfirmDialog(this, myPanel, "Enter cutoff frequency and order:", JOptionPane.OK_CANCEL_OPTION);
+            if (confirmChoice == JOptionPane.OK_OPTION) {
+                int cutoffFrequency = Integer.parseInt(cutoffField.getText());
+                int order = Integer.parseInt(orderField.getText());
+                
+                int[][] mat = imageNG.getMatrice(); // image to int matrix
+                int[][] filteredImage = GlobalLinearFiltering.highPassButterworthFilter(mat, cutoffFrequency, order);
+                imageNG.setMatrice(filteredImage);
+                observer.setCImage(imageNG);
+            }
+            
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(this, "Invalid frequency entered.", "Error", JOptionPane.ERROR_MESSAGE);
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, "Error applying filter: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_jMenuItemHighPassButterworthFilterActionPerformed
     
     /**
      * @param args the command line arguments
@@ -864,8 +957,10 @@ public class IsilImageProcessing extends javax.swing.JFrame implements ClicListe
     private javax.swing.JMenuItem jMenuItemFourierAfficherPartieImaginaire;
     private javax.swing.JMenuItem jMenuItemFourierAfficherPartieReelle;
     private javax.swing.JMenuItem jMenuItemFourierAfficherPhase;
+    private javax.swing.JMenuItem jMenuItemHighPassButterworthFilter;
     private javax.swing.JMenuItem jMenuItemIdealHighPassFilter;
     private javax.swing.JMenuItem jMenuItemIdealLowPassFilter;
+    private javax.swing.JMenuItem jMenuItemLowPassButterworthFilter;
     private javax.swing.JMenuItem jMenuItemNouvelleNG;
     private javax.swing.JMenuItem jMenuItemNouvelleRGB;
     private javax.swing.JMenuItem jMenuItemOuvrirNG;
