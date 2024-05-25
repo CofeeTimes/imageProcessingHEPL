@@ -34,8 +34,8 @@ public class GlobalLinearFiltering {
 
         for (int u = 0; u < M; u++) { 
             for (int v = 0; v < N; v++) {
-//                double D = Math.sqrt(u * u + v * v); // Fonctionne pas ???
-                double D = Math.sqrt((u - M / 2) * (u - M / 2) + (v - N / 2) * (v - N / 2)); // Dans la littérature ??? Sinon kaput
+//                double D = Math.sqrt(u * u + v * v); // Fonctionne pas ??? (Génère un cercle sur le coté gauche de l'image)
+                double D = Math.sqrt((u - M / 2) * (u - M / 2) + (v - N / 2) * (v - N / 2)); // On veut un cercle au millieu de l'image
                 if (D <= cutOffFrequency) { // BW filter
                     H[u][v] = 1;
                 } else {

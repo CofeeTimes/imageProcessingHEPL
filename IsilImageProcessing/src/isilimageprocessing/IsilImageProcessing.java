@@ -5,9 +5,15 @@ import CImage.Exceptions.*;
 import CImage.Observers.*;
 import CImage.Observers.Events.*;
 import ImageProcessing.Complexe.MatriceComplexe;
+import ImageProcessing.Contours.ContoursLineaire;
+import ImageProcessing.Contours.ContoursNonLineaire;
 import ImageProcessing.Fourier.Fourier;
 import ImageProcessing.Histogramme.Histogramme;
+import ImageProcessing.Linear.FiltrageLineaireLocal;
 import ImageProcessing.Linear.GlobalLinearFiltering;
+import ImageProcessing.NonLineaire.MorphoComplexe;
+import ImageProcessing.NonLineaire.MorphoElementaire;
+import ImageProcessing.Seuillage.Seuillage;
 import isilimageprocessing.Dialogues.*;
 import java.awt.*;
 import java.io.*;
@@ -99,12 +105,45 @@ public class IsilImageProcessing extends javax.swing.JFrame implements ClicListe
         jMenuItemFourierAfficherPartieImaginaire = new javax.swing.JMenuItem();
         jMenuHistogramme = new javax.swing.JMenu();
         jMenuHistogrammeAfficher = new javax.swing.JMenuItem();
+        AfficheItem2 = new javax.swing.JMenuItem();
+        jMenu5 = new javax.swing.JMenu();
+        SaturationItem = new javax.swing.JMenuItem();
+        GammaItem = new javax.swing.JMenuItem();
+        EgalisationItem = new javax.swing.JMenuItem();
+        NegatifItem = new javax.swing.JMenuItem();
         jMenuLinearFiltering = new javax.swing.JMenu();
         jMenuGlobal = new javax.swing.JMenu();
         jMenuItemIdealLowPassFilter = new javax.swing.JMenuItem();
         jMenuItemIdealHighPassFilter = new javax.swing.JMenuItem();
         jMenuItemLowPassButterworthFilter = new javax.swing.JMenuItem();
         jMenuItemHighPassButterworthFilter = new javax.swing.JMenuItem();
+        jMenu1 = new javax.swing.JMenu();
+        jMenuItem2 = new javax.swing.JMenuItem();
+        MoyenneurItem = new javax.swing.JMenuItem();
+        jMenu2 = new javax.swing.JMenu();
+        jMenu3 = new javax.swing.JMenu();
+        ErosionItem = new javax.swing.JMenuItem();
+        DilatationItem = new javax.swing.JMenuItem();
+        OuvertureItem = new javax.swing.JMenuItem();
+        FermetureItem = new javax.swing.JMenuItem();
+        jMenu4 = new javax.swing.JMenu();
+        DilGeoItem = new javax.swing.JMenuItem();
+        RecGeoItem = new javax.swing.JMenuItem();
+        MedItem = new javax.swing.JMenuItem();
+        jMenu6 = new javax.swing.JMenu();
+        jMenu7 = new javax.swing.JMenu();
+        PrewittItem = new javax.swing.JMenuItem();
+        SobelItem = new javax.swing.JMenuItem();
+        Laplace4ITem = new javax.swing.JMenuItem();
+        Laplace8Item = new javax.swing.JMenuItem();
+        jMenu8 = new javax.swing.JMenu();
+        gEroItem = new javax.swing.JMenuItem();
+        gDilItem = new javax.swing.JMenuItem();
+        gBeuItem = new javax.swing.JMenuItem();
+        LNLItem = new javax.swing.JMenuItem();
+        jMenu9 = new javax.swing.JMenu();
+        SeuillageItem = new javax.swing.JMenuItem();
+        SeuilAutoItem = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Isil Image Processing");
@@ -292,6 +331,51 @@ public class IsilImageProcessing extends javax.swing.JFrame implements ClicListe
         });
         jMenuHistogramme.add(jMenuHistogrammeAfficher);
 
+        AfficheItem2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/Display 14_p3.jpg"))); // NOI18N
+        AfficheItem2.setText("Afficher les paramètres de l'image");
+        AfficheItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AfficheItem2ActionPerformed(evt);
+            }
+        });
+        jMenuHistogramme.add(AfficheItem2);
+
+        jMenu5.setText("Transformation Lineaire");
+
+        SaturationItem.setText("Lineaires avec saturation");
+        SaturationItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SaturationItemActionPerformed(evt);
+            }
+        });
+        jMenu5.add(SaturationItem);
+
+        GammaItem.setText("Gamma");
+        GammaItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                GammaItemActionPerformed(evt);
+            }
+        });
+        jMenu5.add(GammaItem);
+
+        EgalisationItem.setText("Egalisation");
+        EgalisationItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EgalisationItemActionPerformed(evt);
+            }
+        });
+        jMenu5.add(EgalisationItem);
+
+        NegatifItem.setText("Negatif");
+        NegatifItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                NegatifItemActionPerformed(evt);
+            }
+        });
+        jMenu5.add(NegatifItem);
+
+        jMenuHistogramme.add(jMenu5);
+
         jMenuBar1.add(jMenuHistogramme);
 
         jMenuLinearFiltering.setText("Linear Filtering");
@@ -332,7 +416,191 @@ public class IsilImageProcessing extends javax.swing.JFrame implements ClicListe
 
         jMenuLinearFiltering.add(jMenuGlobal);
 
+        jMenu1.setText("Local");
+
+        jMenuItem2.setText("Masque de convolution");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem2);
+
+        MoyenneurItem.setText("Moyenneur");
+        MoyenneurItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MoyenneurItemActionPerformed(evt);
+            }
+        });
+        jMenu1.add(MoyenneurItem);
+
+        jMenuLinearFiltering.add(jMenu1);
+
         jMenuBar1.add(jMenuLinearFiltering);
+
+        jMenu2.setText("Traitement Non-linéaire");
+
+        jMenu3.setText("Elementaire");
+
+        ErosionItem.setText("Erosion");
+        ErosionItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ErosionItemActionPerformed(evt);
+            }
+        });
+        jMenu3.add(ErosionItem);
+
+        DilatationItem.setText("Dilatation");
+        DilatationItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DilatationItemActionPerformed(evt);
+            }
+        });
+        jMenu3.add(DilatationItem);
+
+        OuvertureItem.setText("Ouverture");
+        OuvertureItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                OuvertureItemActionPerformed(evt);
+            }
+        });
+        jMenu3.add(OuvertureItem);
+
+        FermetureItem.setText("Fermeture");
+        FermetureItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                FermetureItemActionPerformed(evt);
+            }
+        });
+        jMenu3.add(FermetureItem);
+
+        jMenu2.add(jMenu3);
+
+        jMenu4.setText("Complexe");
+
+        DilGeoItem.setText("Dilatation Geodesique");
+        DilGeoItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DilGeoItemActionPerformed(evt);
+            }
+        });
+        jMenu4.add(DilGeoItem);
+
+        RecGeoItem.setText("Reconstruction Geodesique");
+        RecGeoItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                RecGeoItemActionPerformed(evt);
+            }
+        });
+        jMenu4.add(RecGeoItem);
+
+        MedItem.setText("Filtre Median");
+        MedItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MedItemActionPerformed(evt);
+            }
+        });
+        jMenu4.add(MedItem);
+
+        jMenu2.add(jMenu4);
+
+        jMenuBar1.add(jMenu2);
+
+        jMenu6.setText("Contours");
+
+        jMenu7.setText("Lineaire");
+
+        PrewittItem.setText("Prewitt");
+        PrewittItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                PrewittItemActionPerformed(evt);
+            }
+        });
+        jMenu7.add(PrewittItem);
+
+        SobelItem.setText("Sobel");
+        SobelItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SobelItemActionPerformed(evt);
+            }
+        });
+        jMenu7.add(SobelItem);
+
+        Laplace4ITem.setText("Laplace 4");
+        Laplace4ITem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Laplace4ITemActionPerformed(evt);
+            }
+        });
+        jMenu7.add(Laplace4ITem);
+
+        Laplace8Item.setText("Laplace 8");
+        Laplace8Item.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Laplace8ItemActionPerformed(evt);
+            }
+        });
+        jMenu7.add(Laplace8Item);
+
+        jMenu6.add(jMenu7);
+
+        jMenu8.setText("Non-Lineaire");
+
+        gEroItem.setText("gradient Erosion");
+        gEroItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                gEroItemActionPerformed(evt);
+            }
+        });
+        jMenu8.add(gEroItem);
+
+        gDilItem.setText("gradient Dilatation");
+        gDilItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                gDilItemActionPerformed(evt);
+            }
+        });
+        jMenu8.add(gDilItem);
+
+        gBeuItem.setText("gradient Beucher");
+        gBeuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                gBeuItemActionPerformed(evt);
+            }
+        });
+        jMenu8.add(gBeuItem);
+
+        LNLItem.setText("Laplacien Non Lineaire");
+        LNLItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                LNLItemActionPerformed(evt);
+            }
+        });
+        jMenu8.add(LNLItem);
+
+        jMenu6.add(jMenu8);
+
+        jMenuBar1.add(jMenu6);
+
+        jMenu9.setText("Seuillage");
+
+        SeuillageItem.setText("Simple");
+        SeuillageItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SeuillageItemActionPerformed(evt);
+            }
+        });
+        jMenu9.add(SeuillageItem);
+
+        SeuilAutoItem.setText("Automatique");
+        SeuilAutoItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SeuilAutoItemActionPerformed(evt);
+            }
+        });
+        jMenu9.add(SeuilAutoItem);
+
+        jMenuBar1.add(jMenu9);
 
         setJMenuBar(jMenuBar1);
 
@@ -342,18 +610,18 @@ public class IsilImageProcessing extends javax.swing.JFrame implements ClicListe
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 543, Short.MAX_VALUE)
+                .addComponent(jScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 947, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 296, Short.MAX_VALUE)
+                .addComponent(jScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 326, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
-        setSize(new java.awt.Dimension(569, 400));
+        setSize(new java.awt.Dimension(973, 400));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -815,6 +1083,810 @@ public class IsilImageProcessing extends javax.swing.JFrame implements ClicListe
             JOptionPane.showMessageDialog(this, "Error applying filter: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jMenuItemHighPassButterworthFilterActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        
+        if (imageNG == null) 
+        {
+            JOptionPane.showMessageDialog(this, "No grayscale image loaded.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        JTextField masqueTail = new JTextField(5);
+        JTextField masqueText = new JTextField(25);
+        
+        JPanel masquePanel = new JPanel();
+        masquePanel.add(new JLabel("Tails du masque:"));
+        masquePanel.add(masqueTail);
+        masquePanel.add(Box.createHorizontalStrut(15)); // separate
+        masquePanel.add(new JLabel("le masque en lui même \n(;->nouvelle ligne \n,-> nouveau élément)"));
+        masquePanel.add(masqueText);
+        
+        try
+        {
+         int confirmChoice = JOptionPane.showConfirmDialog(this, masquePanel, "Donnée les valeur du masque:", JOptionPane.OK_CANCEL_OPTION);
+            if (confirmChoice == JOptionPane.OK_OPTION) 
+            {
+                int tail = Integer.parseInt(masqueTail.getText());
+                if(tail % 2 == 0)
+                {
+                    throw new NumberFormatException("Tail n'est pas impaire");
+                }
+                
+                //Lecture du masque
+                String[] masqueLignes = masqueText.getText().split(";");
+                double[][] masque = new double[masqueLignes.length][masqueLignes.length];
+                double sumMasque = 0;
+                for (int u = 0; u < masqueLignes.length; u++)
+                {
+                    for (int v = 0; v < masqueLignes.length; v++) 
+                    {
+                        masque[u][v] = Double.parseDouble(masqueLignes[v].split(",")[u]);
+                        sumMasque += masque[u][v];
+                    }
+                }
+                
+                if(sumMasque > 1 )
+                {
+                    throw new Exception("La somme du masque doit être équale à un");
+                }
+                
+                int[][] imgFiltrer = FiltrageLineaireLocal.filtreMasqueConvolution(imageNG.getMatrice(),masque);
+                imageNG.setMatrice(imgFiltrer);
+                observer.setCImage(imageNG);
+                System.out.println("end");
+            }
+        } 
+        catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        catch (ArrayIndexOutOfBoundsException oe)
+        {
+            JOptionPane.showMessageDialog(this, "Le format du masque est incorrect", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        catch(Exception e)
+        {
+            JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        
+        
+        
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void MoyenneurItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MoyenneurItemActionPerformed
+        if (imageNG == null) 
+        {
+            JOptionPane.showMessageDialog(this, "No grayscale image loaded.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        JTextField masqueTail = new JTextField(5);
+        
+        JPanel masquePanel = new JPanel();
+        masquePanel.add(new JLabel("Tails du masque:"));
+        masquePanel.add(masqueTail);
+        
+        try
+        {
+         int confirmChoice = JOptionPane.showConfirmDialog(this, masquePanel, "Donnée les valeur du masque:", JOptionPane.OK_CANCEL_OPTION);
+         if (confirmChoice == JOptionPane.OK_OPTION) 
+            {
+                int tail = Integer.parseInt(masqueTail.getText());
+                if(tail % 2 == 0)
+                {
+                    throw new NumberFormatException("Tail n'est pas impaire");
+                }
+                
+                int[][] imgFiltrer = FiltrageLineaireLocal.filtreMoyenneur(imageNG.getMatrice(),tail);
+                imageNG.setMatrice(imgFiltrer);
+                observer.setCImage(imageNG);
+                System.out.println("end");
+            }
+        }
+        catch(Exception e)
+        {
+            JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        
+
+    }//GEN-LAST:event_MoyenneurItemActionPerformed
+
+    private void DilatationItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DilatationItemActionPerformed
+       if (imageNG == null) 
+        {
+            JOptionPane.showMessageDialog(this, "No grayscale image loaded.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        JTextField masqueTail = new JTextField(5);
+        
+        JPanel masquePanel = new JPanel();
+        masquePanel.add(new JLabel("Tails du masque:"));
+        masquePanel.add(masqueTail);
+        
+        try
+        {
+         int confirmChoice = JOptionPane.showConfirmDialog(this, masquePanel, "Donnée les valeur du masque:", JOptionPane.OK_CANCEL_OPTION);
+         if (confirmChoice == JOptionPane.OK_OPTION) 
+            {
+                int tail = Integer.parseInt(masqueTail.getText());
+                if(tail % 2 == 0)
+                {
+                    throw new NumberFormatException("Tail n'est pas impaire");
+                }
+                
+                int[][] imgFiltrer = MorphoElementaire.dilatation(imageNG.getMatrice(),tail);
+                imageNG.setMatrice(imgFiltrer);
+                observer.setCImage(imageNG);
+                System.out.println("end");
+            }
+        }
+        catch(Exception e)
+        {
+            JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_DilatationItemActionPerformed
+
+    private void ErosionItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ErosionItemActionPerformed
+       if (imageNG == null) 
+        {
+            JOptionPane.showMessageDialog(this, "No grayscale image loaded.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        JTextField masqueTail = new JTextField(5);
+        
+        JPanel masquePanel = new JPanel();
+        masquePanel.add(new JLabel("Tails du masque:"));
+        masquePanel.add(masqueTail);
+        
+        try
+        {
+         int confirmChoice = JOptionPane.showConfirmDialog(this, masquePanel, "Donnée les valeur du masque:", JOptionPane.OK_CANCEL_OPTION);
+         if (confirmChoice == JOptionPane.OK_OPTION) 
+            {
+                int tail = Integer.parseInt(masqueTail.getText());
+                if(tail % 2 == 0)
+                {
+                    throw new NumberFormatException("Tail n'est pas impaire");
+                }
+                
+                int[][] imgFiltrer = MorphoElementaire.erosion(imageNG.getMatrice(),tail);
+                imageNG.setMatrice(imgFiltrer);
+                observer.setCImage(imageNG);
+                System.out.println("end");
+            }
+        }
+        catch(Exception e)
+        {
+            JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_ErosionItemActionPerformed
+
+    private void OuvertureItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OuvertureItemActionPerformed
+      if (imageNG == null) 
+        {
+            JOptionPane.showMessageDialog(this, "No grayscale image loaded.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        JTextField masqueTail = new JTextField(5);
+        
+        JPanel masquePanel = new JPanel();
+        masquePanel.add(new JLabel("Tails du masque:"));
+        masquePanel.add(masqueTail);
+        
+        try
+        {
+         int confirmChoice = JOptionPane.showConfirmDialog(this, masquePanel, "Donnée les valeur du masque:", JOptionPane.OK_CANCEL_OPTION);
+         if (confirmChoice == JOptionPane.OK_OPTION) 
+            {
+                int tail = Integer.parseInt(masqueTail.getText());
+                if(tail % 2 == 0)
+                {
+                    throw new NumberFormatException("Tail n'est pas impaire");
+                }
+                
+                int[][] imgFiltrer = MorphoElementaire.ouverture(imageNG.getMatrice(),tail);
+                imageNG.setMatrice(imgFiltrer);
+                observer.setCImage(imageNG);
+                System.out.println("end");
+            }
+        }
+        catch(Exception e)
+        {
+            JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_OuvertureItemActionPerformed
+
+    private void FermetureItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FermetureItemActionPerformed
+    if (imageNG == null) 
+        {
+            JOptionPane.showMessageDialog(this, "No grayscale image loaded.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        JTextField masqueTail = new JTextField(5);
+        
+        JPanel masquePanel = new JPanel();
+        masquePanel.add(new JLabel("Tails du masque:"));
+        masquePanel.add(masqueTail);
+        
+        
+        try
+        {
+         int confirmChoice = JOptionPane.showConfirmDialog(this, masquePanel, "Donnée les valeur du masque:", JOptionPane.OK_CANCEL_OPTION);
+         if (confirmChoice == JOptionPane.OK_OPTION) 
+            {
+                int tail = Integer.parseInt(masqueTail.getText());
+                if(tail % 2 == 0)
+                {
+                    throw new NumberFormatException("Tail n'est pas impaire");
+                }
+                
+                int[][] imgFiltrer = MorphoElementaire.fermeture(imageNG.getMatrice(),tail);
+                imageNG.setMatrice(imgFiltrer);
+                observer.setCImage(imageNG);
+                System.out.println("end");
+            }
+        }
+        catch(Exception e)
+        {
+            JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_FermetureItemActionPerformed
+
+    private void DilGeoItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DilGeoItemActionPerformed
+        
+        if (imageNG == null) 
+        {
+            JOptionPane.showMessageDialog(this, "No grayscale image loaded.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        //Choisis un masque
+        try{
+            CImageNG  masqueGeo = new CImageNG(new int[1][1]);
+            JFileChooser choix = new JFileChooser();
+            File fichier;
+
+            choix.setCurrentDirectory(new File ("."));
+            if (choix.showOpenDialog(null) == JFileChooser.APPROVE_OPTION)
+            {
+                fichier = choix.getSelectedFile();
+                if (fichier != null)
+                {
+                    try 
+                    {
+                        masqueGeo = new CImageNG(fichier);
+                    } 
+                    catch (IOException ex) 
+                    {
+                        System.err.println("Erreur I/O : " + ex.getMessage());
+                        return;
+                    }
+                }  
+            }else
+            {
+                return;
+            }
+
+            JTextField iterField = new JTextField(5);
+            JTextField tailField = new JTextField(5);
+            JPanel masquePanel = new JPanel();
+            masquePanel.add(new JLabel("Nombre d'itération:"));
+            masquePanel.add(iterField);
+            masquePanel.add(Box.createHorizontalStrut(15)); // separate
+            masquePanel.add(new JLabel("Tail de l'élément structurant :"));
+            masquePanel.add(tailField);
+
+             int confirmChoice = JOptionPane.showConfirmDialog(this, masquePanel, "Donnée les valeur du masque:", JOptionPane.OK_CANCEL_OPTION);
+             if (confirmChoice == JOptionPane.OK_OPTION) 
+             {
+                int iter = Integer.parseInt(iterField.getText());  
+                int tail = Integer.parseInt(tailField.getText()); 
+                int[][] imgFiltrer = MorphoComplexe.dilatationGeodesique(imageNG.getMatrice(),masqueGeo.getMatrice(),iter,tail);
+                imageNG.setMatrice(imgFiltrer);
+                observer.setCImage(imageNG);
+                System.out.println("end");
+             }
+        }catch(Exception e)
+            {
+                JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            }      
+    }//GEN-LAST:event_DilGeoItemActionPerformed
+
+    private void RecGeoItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RecGeoItemActionPerformed
+          
+        if (imageNG == null) 
+        {
+            JOptionPane.showMessageDialog(this, "No grayscale image loaded.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        //Choisis un masque
+        try{
+            CImageNG  masqueGeo = new CImageNG(new int[1][1]);
+            JFileChooser choix = new JFileChooser();
+            File fichier;
+
+            choix.setCurrentDirectory(new File ("."));
+            if (choix.showOpenDialog(null) == JFileChooser.APPROVE_OPTION)
+            {
+                fichier = choix.getSelectedFile();
+                if (fichier != null)
+                {
+                    try 
+                    {
+                        masqueGeo = new CImageNG(fichier);
+                    } 
+                    catch (IOException ex) 
+                    {
+                        System.err.println("Erreur I/O : " + ex.getMessage());
+                        return;
+                    }
+                }  
+            }else
+            {
+                return;
+            }
+
+            JTextField tailField = new JTextField(5);
+            JPanel masquePanel = new JPanel();
+            masquePanel.add(new JLabel("Tail de l'élément structurant :"));
+            masquePanel.add(tailField);
+            
+             int confirmChoice = JOptionPane.showConfirmDialog(this, masquePanel, "Donnée les valeur du masque:", JOptionPane.OK_CANCEL_OPTION);
+             if (confirmChoice == JOptionPane.OK_OPTION) 
+             {
+                int tail = Integer.parseInt(tailField.getText());  
+                int[][] imgFiltrer = MorphoComplexe.reconstructionGeodesique(imageNG.getMatrice(),masqueGeo.getMatrice(), tail);
+                imageNG.setMatrice(imgFiltrer);
+                observer.setCImage(imageNG);
+                System.out.println("end");
+             }
+        }catch(Exception e)
+            {
+                JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            }
+    }//GEN-LAST:event_RecGeoItemActionPerformed
+
+    private void MedItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MedItemActionPerformed
+        if (imageNG == null) 
+        {
+            JOptionPane.showMessageDialog(this, "No grayscale image loaded.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        JTextField masqueTail = new JTextField(5);
+        
+        JPanel masquePanel = new JPanel();
+        masquePanel.add(new JLabel("Tails du masque:"));
+        masquePanel.add(masqueTail);
+        
+        try
+        {
+         int confirmChoice = JOptionPane.showConfirmDialog(this, masquePanel, "Donnée les valeur du masque:", JOptionPane.OK_CANCEL_OPTION);
+         if (confirmChoice == JOptionPane.OK_OPTION) 
+            {
+                int tail = Integer.parseInt(masqueTail.getText());
+                if(tail % 2 == 0)
+                {
+                    throw new NumberFormatException("Tail n'est pas impaire");
+                }
+                
+                int[][] imgFiltrer = MorphoComplexe.filtreMedian(imageNG.getMatrice(),tail);
+                imageNG.setMatrice(imgFiltrer);
+                observer.setCImage(imageNG);
+                System.out.println("end");
+            }
+        }
+        catch(Exception e)
+        {
+            JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_MedItemActionPerformed
+
+    private void AfficheItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AfficheItem2ActionPerformed
+      if (imageNG == null) 
+        {
+            JOptionPane.showMessageDialog(this, "No grayscale image loaded.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        try{
+        JPanel masquePanel = new JPanel();
+        masquePanel.add(new JLabel("MAX :"+Histogramme.maximum(imageNG.getMatrice())));
+        masquePanel.add(new JLabel("MIN :"+Histogramme.minimum(imageNG.getMatrice())));
+        masquePanel.add(new JLabel("LUM :"+Histogramme.luminance(imageNG.getMatrice())));
+        masquePanel.add(new JLabel("CONTRASTE 1 :"+Histogramme.contraste1(imageNG.getMatrice())));
+        masquePanel.add(new JLabel("CONTRASTE 2 :"+Histogramme.contraste2(imageNG.getMatrice())));
+        JOptionPane.showConfirmDialog(this, masquePanel, "Donnée les valeur du masque:", JOptionPane.OK_CANCEL_OPTION);
+        
+        }catch (Exception e)
+        {
+           JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);  
+        }
+        
+        
+    }//GEN-LAST:event_AfficheItem2ActionPerformed
+
+    private void EgalisationItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EgalisationItemActionPerformed
+       int[] histo;
+        try 
+        {
+            int f_int[][] = imageNG.getMatrice();
+            histo = Histogramme.Histogramme256(f_int);
+        } 
+        catch (CImageNGException ex) 
+        {
+            System.out.println("Erreur CImageNG : " + ex.getMessage());
+            return;
+        }
+
+        MakeHisto(histo,"Avant Egalisation","Avant Egalisation");
+        try{
+        int[][] imgFiltrer = Histogramme.rehaussement(imageNG.getMatrice(), Histogramme.creeCourbeTonaleEgalisation(imageNG.getMatrice()));
+        imageNG.setMatrice(imgFiltrer);
+        observer.setCImage(imageNG);
+        System.out.println("end");
+        try 
+        {
+            int f_int[][] = imageNG.getMatrice();
+            histo = Histogramme.Histogramme256(f_int);
+        } 
+        catch (CImageNGException ex) 
+        {
+            System.out.println("Erreur CImageNG : " + ex.getMessage());
+            return;
+        }
+        MakeHisto(histo,"Avec Egalisation","Avec Egalisation");
+        }
+        catch(Exception e)
+        {
+         JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);   
+        }
+             
+    }//GEN-LAST:event_EgalisationItemActionPerformed
+
+    private void SaturationItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaturationItemActionPerformed
+        int histo[];
+        
+        try 
+        {
+            int f_int[][] = imageNG.getMatrice();
+            histo = Histogramme.Histogramme256(f_int);
+        } 
+        catch (CImageNGException ex) 
+        {
+            System.out.println("Erreur CImageNG : " + ex.getMessage());
+            return;
+        }
+        MakeHisto(histo,"Avant Saturation","Avant Saturation");
+        
+        JTextField minField = new JTextField(5);
+        JTextField maxField = new JTextField(5);
+        JPanel masquePanel = new JPanel();
+        masquePanel.add(new JLabel("min saturation :")); 
+        masquePanel.add(minField);
+        masquePanel.add(Box.createHorizontalStrut(15)); 
+        masquePanel.add(new JLabel("max saturation :")); 
+        masquePanel.add(maxField);
+   
+        int confirmChoice = JOptionPane.showConfirmDialog(this, masquePanel, "Donnée les valeur du masque:", JOptionPane.OK_CANCEL_OPTION);
+        if (confirmChoice == JOptionPane.OK_OPTION) 
+             {
+                try{
+                 int min=Integer.parseInt(minField.getText());
+                 int max =Integer.parseInt(maxField.getText()); 
+                int[][] imgFiltrer = Histogramme.rehaussement(imageNG.getMatrice(), Histogramme.creeCourbeTonaleLineaireSaturation(min, max));
+                imageNG.setMatrice(imgFiltrer);
+                observer.setCImage(imageNG);
+                System.out.println("end");
+                try 
+                {
+                    int f_int[][] = imageNG.getMatrice();
+                    histo = Histogramme.Histogramme256(f_int);
+                } 
+                catch (CImageNGException ex) 
+                {
+                    System.out.println("Erreur CImageNG : " + ex.getMessage());
+                    return;
+                }
+                MakeHisto(histo,"Avec Saturation","Avec Saturation");
+                }
+                catch(Exception e)
+                {
+                 JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);   
+                }
+             }  
+    }//GEN-LAST:event_SaturationItemActionPerformed
+    
+    private void GammaItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GammaItemActionPerformed
+      
+        int[] histo;
+        try 
+        {
+            int f_int[][] = imageNG.getMatrice();
+            histo = Histogramme.Histogramme256(f_int);
+        } 
+        catch (CImageNGException ex) 
+        {
+            System.out.println("Erreur CImageNG : " + ex.getMessage());
+            return;
+        }
+        MakeHisto(histo,"Avant Gamme","Avant Gamme");
+        
+        JTextField gammaField = new JTextField(5);
+        JPanel masquePanel = new JPanel();
+        masquePanel.add(new JLabel("gamme :")); 
+        masquePanel.add(gammaField); 
+   
+        int confirmChoice = JOptionPane.showConfirmDialog(this, masquePanel, "Donnée les valeur du masque:", JOptionPane.OK_CANCEL_OPTION);
+        if (confirmChoice == JOptionPane.OK_OPTION) 
+             {
+                try{
+                 double gamma=Double.parseDouble(gammaField.getText());
+                int[][] imgFiltrer = Histogramme.rehaussement(imageNG.getMatrice(), Histogramme.creeCourbeTonaleGamma(gamma));
+                imageNG.setMatrice(imgFiltrer);
+                observer.setCImage(imageNG);
+                System.out.println("end");
+                try 
+                {
+                    int f_int[][] = imageNG.getMatrice();
+                    histo = Histogramme.Histogramme256(f_int);
+                } 
+                catch (CImageNGException ex) 
+                {
+                    System.out.println("Erreur CImageNG : " + ex.getMessage());
+                    return;
+                }
+                MakeHisto(histo,"Avec Gamma","Avec Gamme");
+                }
+                catch(Exception e)
+                {
+                 JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);   
+                }
+             }
+    }//GEN-LAST:event_GammaItemActionPerformed
+
+    private void NegatifItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NegatifItemActionPerformed
+       int[] histo;
+        try 
+        {
+            int f_int[][] = imageNG.getMatrice();
+            histo = Histogramme.Histogramme256(f_int);
+        } 
+        catch (CImageNGException ex) 
+        {
+            System.out.println("Erreur CImageNG : " + ex.getMessage());
+            return;
+        }
+
+        MakeHisto(histo,"Avant Negatif","Avant Negatif");
+        try{
+        int[][] imgFiltrer = Histogramme.rehaussement(imageNG.getMatrice(), Histogramme.creeCourbeTonaleNegatif());
+        imageNG.setMatrice(imgFiltrer);
+        observer.setCImage(imageNG);
+        System.out.println("end");
+        try 
+        {
+            int f_int[][] = imageNG.getMatrice();
+            histo = Histogramme.Histogramme256(f_int);
+        } 
+        catch (CImageNGException ex) 
+        {
+            System.out.println("Erreur CImageNG : " + ex.getMessage());
+            return;
+        }
+        MakeHisto(histo,"Avec Negatif","Avec Negatif");
+        }
+        catch(Exception e)
+        {
+         JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);   
+        }
+    }//GEN-LAST:event_NegatifItemActionPerformed
+
+    private void PrewittItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PrewittItemActionPerformed
+        if (imageNG == null) 
+        {
+            JOptionPane.showMessageDialog(this, "No grayscale image loaded.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        try{
+        JTextField dirField = new JTextField(5);
+        JPanel masquePanel = new JPanel();
+        masquePanel.add(new JLabel("Direction du filtre Prewitt :"));
+        masquePanel.add(dirField);
+
+         int confirmChoice = JOptionPane.showConfirmDialog(this, masquePanel, "Donnée les valeur du masque:", JOptionPane.OK_CANCEL_OPTION);
+         if (confirmChoice == JOptionPane.OK_OPTION) 
+         {
+            int dir = Integer.parseInt(dirField.getText());  
+            int[][] imgFiltrer = ContoursLineaire.gradientPrewitt(imageNG.getMatrice(),dir);
+            imageNG.setMatrice(imgFiltrer);
+            observer.setCImage(imageNG);
+            System.out.println("end");
+         }
+        }catch(Exception e)
+        {
+            JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        
+        
+    }//GEN-LAST:event_PrewittItemActionPerformed
+
+    private void SobelItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SobelItemActionPerformed
+        if (imageNG == null) 
+        {
+            JOptionPane.showMessageDialog(this, "No grayscale image loaded.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        try{
+        JTextField dirField = new JTextField(5);
+        JPanel masquePanel = new JPanel();
+        masquePanel.add(new JLabel("Direction du filtre Sobel :"));
+        masquePanel.add(dirField);
+
+         int confirmChoice = JOptionPane.showConfirmDialog(this, masquePanel, "Donnée les valeur du masque:", JOptionPane.OK_CANCEL_OPTION);
+         if (confirmChoice == JOptionPane.OK_OPTION) 
+         {
+            int dir = Integer.parseInt(dirField.getText());  
+            int[][] imgFiltrer = ContoursLineaire.gradientSobel(imageNG.getMatrice(),dir);
+            imageNG.setMatrice(imgFiltrer);
+            observer.setCImage(imageNG);
+            System.out.println("end");
+         }
+        }catch(Exception e)
+        {
+            JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_SobelItemActionPerformed
+
+    private void Laplace4ITemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Laplace4ITemActionPerformed
+       if (imageNG == null) 
+        {
+            JOptionPane.showMessageDialog(this, "No grayscale image loaded.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        try{
+            int[][] imgFiltrer = ContoursLineaire.laplacien4(imageNG.getMatrice());
+            imageNG.setMatrice(imgFiltrer);
+            observer.setCImage(imageNG);
+            System.out.println("end");
+        }catch(Exception e)
+        {
+            JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        } 
+    }//GEN-LAST:event_Laplace4ITemActionPerformed
+
+    private void Laplace8ItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Laplace8ItemActionPerformed
+    if (imageNG == null) 
+        {
+            JOptionPane.showMessageDialog(this, "No grayscale image loaded.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        try{
+            int[][] imgFiltrer = ContoursLineaire.laplacien8(imageNG.getMatrice());
+            imageNG.setMatrice(imgFiltrer);
+            observer.setCImage(imageNG);
+            System.out.println("end");
+        }catch(Exception e)
+        {
+            JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_Laplace8ItemActionPerformed
+
+    private void gEroItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gEroItemActionPerformed
+       if (imageNG == null) 
+        {
+            JOptionPane.showMessageDialog(this, "No grayscale image loaded.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        try{
+            int[][] imgFiltrer = ContoursNonLineaire.gradientErosion(imageNG.getMatrice());
+            imageNG.setMatrice(imgFiltrer);
+            observer.setCImage(imageNG);
+            System.out.println("end");
+        }catch(Exception e)
+        {
+            JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_gEroItemActionPerformed
+
+    private void gDilItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gDilItemActionPerformed
+       if (imageNG == null) 
+        {
+            JOptionPane.showMessageDialog(this, "No grayscale image loaded.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        try{
+            int[][] imgFiltrer = ContoursNonLineaire.gradientDilatation(imageNG.getMatrice());
+            imageNG.setMatrice(imgFiltrer);
+            observer.setCImage(imageNG);
+            System.out.println("end");
+        }catch(Exception e)
+        {
+            JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_gDilItemActionPerformed
+
+    private void gBeuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gBeuItemActionPerformed
+       if (imageNG == null) 
+        {
+            JOptionPane.showMessageDialog(this, "No grayscale image loaded.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        try{
+            int[][] imgFiltrer = ContoursNonLineaire.gradientBeucher(imageNG.getMatrice());
+            imageNG.setMatrice(imgFiltrer);
+            observer.setCImage(imageNG);
+            System.out.println("end");
+        }catch(Exception e)
+        {
+            JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_gBeuItemActionPerformed
+
+    private void LNLItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LNLItemActionPerformed
+    if (imageNG == null) 
+        {
+            JOptionPane.showMessageDialog(this, "No grayscale image loaded.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        try{
+            int[][] imgFiltrer = ContoursNonLineaire.laplacienNonLineaire(imageNG.getMatrice());
+            imageNG.setMatrice(imgFiltrer);
+            observer.setCImage(imageNG);
+            System.out.println("end");
+        }catch(Exception e)
+        {
+            JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }       
+    }//GEN-LAST:event_LNLItemActionPerformed
+
+    private void SeuillageItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SeuillageItemActionPerformed
+       if (imageNG == null) 
+        {
+            JOptionPane.showMessageDialog(this, "No grayscale image loaded.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        try{
+        JTextField seuilleField = new JTextField(5);
+        JPanel masquePanel = new JPanel();
+        masquePanel.add(new JLabel("Seuille :"));
+        masquePanel.add(seuilleField);
+
+         int confirmChoice = JOptionPane.showConfirmDialog(this, masquePanel, "Donnée les valeur du masque:", JOptionPane.OK_CANCEL_OPTION);
+         if (confirmChoice == JOptionPane.OK_OPTION) 
+         {
+            int seuille = Integer.parseInt(seuilleField.getText());  
+            int[][] imgFiltrer = Seuillage.seuillageSimple(imageNG.getMatrice(),seuille);
+            imageNG.setMatrice(imgFiltrer);
+            observer.setCImage(imageNG);
+            System.out.println("end");
+         }
+        }catch(Exception e)
+        {
+            JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_SeuillageItemActionPerformed
+
+    private void SeuilAutoItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SeuilAutoItemActionPerformed
+     if (imageNG == null) 
+        {
+            JOptionPane.showMessageDialog(this, "No grayscale image loaded.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        try{
+            int[][] imgFiltrer = Seuillage.seuillageAutomatique(imageNG.getMatrice());
+            imageNG.setMatrice(imgFiltrer);
+            observer.setCImage(imageNG);
+                System.out.println("end");
+        }catch(Exception e)
+        {
+            JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_SeuilAutoItemActionPerformed
     
     /**
      * @param args the command line arguments
@@ -935,14 +2007,68 @@ public class IsilImageProcessing extends javax.swing.JFrame implements ClicListe
         }
     }
     
+    private void MakeHisto(int[] histo,String NomData, String nomChart)
+    {
+     // Cr�ation du dataset
+        XYSeries serie = new XYSeries(NomData);
+        for(int i=0 ; i<256 ; i++) serie.add(i,histo[i]);
+        XYSeriesCollection dataset = new XYSeriesCollection();
+        dataset.addSeries(serie);
+        
+        // Creation du chart
+        JFreeChart chart = ChartFactory.createHistogram(nomChart,"Niveaux de gris","Nombre de pixels",dataset,PlotOrientation.VERTICAL,false,false,false);
+
+        XYPlot plot = (XYPlot)chart.getXYPlot();
+        ValueAxis axeX = plot.getDomainAxis();
+        axeX.setRange(0,255);
+        plot.setDomainAxis(axeX);
+        
+        // creation d'une frame
+        ChartFrame frame = new ChartFrame("Histogramme de l'image",chart);
+        frame.pack();
+        frame.setVisible(true);  
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem AfficheItem2;
+    private javax.swing.JMenuItem DilGeoItem;
+    private javax.swing.JMenuItem DilatationItem;
+    private javax.swing.JMenuItem EgalisationItem;
+    private javax.swing.JMenuItem ErosionItem;
+    private javax.swing.JMenuItem FermetureItem;
+    private javax.swing.JMenuItem GammaItem;
+    private javax.swing.JMenuItem LNLItem;
+    private javax.swing.JMenuItem Laplace4ITem;
+    private javax.swing.JMenuItem Laplace8Item;
+    private javax.swing.JMenuItem MedItem;
+    private javax.swing.JMenuItem MoyenneurItem;
+    private javax.swing.JMenuItem NegatifItem;
+    private javax.swing.JMenuItem OuvertureItem;
+    private javax.swing.JMenuItem PrewittItem;
+    private javax.swing.JMenuItem RecGeoItem;
+    private javax.swing.JMenuItem SaturationItem;
+    private javax.swing.JMenuItem SeuilAutoItem;
+    private javax.swing.JMenuItem SeuillageItem;
+    private javax.swing.JMenuItem SobelItem;
     private javax.swing.ButtonGroup buttonGroupDessiner;
+    private javax.swing.JMenuItem gBeuItem;
+    private javax.swing.JMenuItem gDilItem;
+    private javax.swing.JMenuItem gEroItem;
     private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItemDessinerCercle;
     private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItemDessinerCerclePlein;
     private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItemDessinerLigne;
     private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItemDessinerPixel;
     private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItemDessinerRectangle;
     private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItemDessinerRectanglePlein;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenu jMenu4;
+    private javax.swing.JMenu jMenu5;
+    private javax.swing.JMenu jMenu6;
+    private javax.swing.JMenu jMenu7;
+    private javax.swing.JMenu jMenu8;
+    private javax.swing.JMenu jMenu9;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenu jMenuDessiner;
     private javax.swing.JMenu jMenuFourier;
@@ -951,6 +2077,7 @@ public class IsilImageProcessing extends javax.swing.JFrame implements ClicListe
     private javax.swing.JMenu jMenuHistogramme;
     private javax.swing.JMenuItem jMenuHistogrammeAfficher;
     private javax.swing.JMenu jMenuImage;
+    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItemCouleurPinceau;
     private javax.swing.JMenuItem jMenuItemEnregistrerSous;
     private javax.swing.JMenuItem jMenuItemFourierAfficherModule;
