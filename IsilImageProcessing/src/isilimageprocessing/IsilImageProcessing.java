@@ -11,6 +11,7 @@ import ImageProcessing.Fourier.Fourier;
 import ImageProcessing.Histogramme.Histogramme;
 import ImageProcessing.Linear.FiltrageLineaireLocal;
 import ImageProcessing.Linear.GlobalLinearFiltering;
+import ImageProcessing.Linear.LocalLinearFiltering;
 import ImageProcessing.NonLineaire.MorphoComplexe;
 import ImageProcessing.NonLineaire.MorphoElementaire;
 import ImageProcessing.Seuillage.Seuillage;
@@ -1132,6 +1133,8 @@ public class IsilImageProcessing extends javax.swing.JFrame implements ClicListe
                 }
                 
                 int[][] imgFiltrer = FiltrageLineaireLocal.filtreMasqueConvolution(imageNG.getMatrice(),masque);
+//                int[][] imgFiltrer = LocalLinearFiltering.convolutionMaskFilter(imageNG.getMatrice(),masque);
+
                 imageNG.setMatrice(imgFiltrer);
                 observer.setCImage(imageNG);
                 System.out.println("end");
