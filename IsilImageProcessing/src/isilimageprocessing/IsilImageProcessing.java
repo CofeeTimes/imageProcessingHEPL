@@ -963,8 +963,6 @@ public class IsilImageProcessing extends javax.swing.JFrame implements ClicListe
     }//GEN-LAST:event_jMenuItemOuvrirRGBActionPerformed
 
     private void jMenuItemIdealLowPassFilterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemIdealLowPassFilterActionPerformed
-        // TODO add your handling code here:
-        
         if (imageNG == null) {
             JOptionPane.showMessageDialog(this, "No grayscale image loaded.", "Error", JOptionPane.ERROR_MESSAGE); // https://mkyong.com/swing/java-swing-how-to-make-a-simple-dialog/
             return;
@@ -987,8 +985,6 @@ public class IsilImageProcessing extends javax.swing.JFrame implements ClicListe
     }//GEN-LAST:event_jMenuItemIdealLowPassFilterActionPerformed
 
     private void jMenuItemIdealHighPassFilterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemIdealHighPassFilterActionPerformed
-        // TODO add your handling code here:
-
         if (imageNG == null) {
             JOptionPane.showMessageDialog(this, "No grayscale image loaded.", "Error", JOptionPane.ERROR_MESSAGE); // https://mkyong.com/swing/java-swing-how-to-make-a-simple-dialog/
             return;
@@ -1011,8 +1007,6 @@ public class IsilImageProcessing extends javax.swing.JFrame implements ClicListe
     }//GEN-LAST:event_jMenuItemIdealHighPassFilterActionPerformed
 
     private void jMenuItemLowPassButterworthFilterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemLowPassButterworthFilterActionPerformed
-        // TODO add your handling code here:
-        
         if (imageNG == null) {
             JOptionPane.showMessageDialog(this, "No grayscale image loaded.", "Error", JOptionPane.ERROR_MESSAGE);
             return;
@@ -1049,8 +1043,6 @@ public class IsilImageProcessing extends javax.swing.JFrame implements ClicListe
     }//GEN-LAST:event_jMenuItemLowPassButterworthFilterActionPerformed
 
     private void jMenuItemHighPassButterworthFilterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemHighPassButterworthFilterActionPerformed
-        // TODO add your handling code here:
-        
         if (imageNG == null) {
             JOptionPane.showMessageDialog(this, "No grayscale image loaded.", "Error", JOptionPane.ERROR_MESSAGE);
             return;
