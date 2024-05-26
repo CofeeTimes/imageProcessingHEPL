@@ -668,9 +668,19 @@ public class IsilImageProcessing extends javax.swing.JFrame implements ClicListe
         jMenuFinalQuestion.add(Partie3);
 
         Partir4.setText("4");
+        Partir4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Partir4ActionPerformed(evt);
+            }
+        });
         jMenuFinalQuestion.add(Partir4);
 
         Partie5.setText("5");
+        Partie5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Partie5ActionPerformed(evt);
+            }
+        });
         jMenuFinalQuestion.add(Partie5);
 
         Partie6.setText("6");
@@ -2401,6 +2411,17 @@ public class IsilImageProcessing extends javax.swing.JFrame implements ClicListe
         }
         
     }//GEN-LAST:event_Partie1ItemActionPerformed
+
+    private void Partir4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Partir4ActionPerformed
+        // TODO add your handling code here: isi
+        
+        
+    }//GEN-LAST:event_Partir4ActionPerformed
+
+    private void Partie5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Partie5ActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_Partie5ActionPerformed
     
     /**
      * @param args the command line arguments
