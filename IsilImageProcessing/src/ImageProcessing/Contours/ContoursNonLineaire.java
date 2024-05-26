@@ -57,7 +57,7 @@ public class ContoursNonLineaire {
     }
     public static int[][] laplacienNonLineaire(int[][] image)
     {
-      int[][] ero = gradientErosion(image);
+        int[][] ero = gradientErosion(image);
         int[][] dil = gradientDilatation(image);
         int[][] ret = new int[ero.length][ero[0].length];
         

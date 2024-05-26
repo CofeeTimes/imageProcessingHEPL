@@ -22,3 +22,6 @@
 hs_err_pid*
 replay_pid*
 /IsilImageProcessing/build/
+/IsilImageProcessing/dist/
+/IsilImageProcessing/.idea
+/IsilImageProcessing/nbproject/

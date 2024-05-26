@@ -38,7 +38,7 @@ public class MorphoElementaire
     
     public static int[][] dilatation(int [][] image,int tailleMasque)
     {
-       final int CENTRE = (int)(tailleMasque /2.0);
+        final int CENTRE = (int)(tailleMasque /2.0);
         int[][] ret = new int[image.length][image[0].length]; 
         
         for (int u = 0; u < image.length; u++) 
@@ -58,7 +58,7 @@ public class MorphoElementaire
                 }
                 ret[u][v] = max; 
             }
- 
+
         }
         return ret; 
     }
@@ -74,20 +74,19 @@ public class MorphoElementaire
     }
     
     public static int getAtIndex(int[][] image, int u, int v )
-   {
-      int sizeU = image.length;
-      if(u < 0 || u >= sizeU)
-      {
-          return 0;
-      }
-      
-      int sizeV = image[u].length;
-      
-      if(v < 0 || v >= sizeV)
-      {
-          return 0;
-      }
-      return image[u][v];
-      
-   }
+    {
+        int sizeU = image.length;
+        if(u < 0 || u >= sizeU)
+        {
+            return 0;
+        }
+        
+        int sizeV = image[u].length;
+        
+        if(v < 0 || v >= sizeV)
+        {
+            return 0;
+        }
+        return image[u][v];
+    }
 }

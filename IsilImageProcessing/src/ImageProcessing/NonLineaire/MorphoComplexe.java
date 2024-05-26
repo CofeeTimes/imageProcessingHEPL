@@ -24,12 +24,12 @@ public class MorphoComplexe {
             {
                 for (int v = 0; v < ret[u].length; v++) 
                 {
-                   if(masqueGeodesique[u][v] == 0)
-                   {
-                       ret[u][v] = 0;
-                   } 
+                    if(masqueGeodesique[u][v] == 0)
+                    {
+                        ret[u][v] = 0;
+                    } 
                 }
-  
+
             }
         }
         return ret;
@@ -42,19 +42,18 @@ public class MorphoComplexe {
         int dif;
         do
         {
-          
             curentOrder = dilatation(curentOrder,tail);
             
             for (int u = 0; u < curentOrder.length; u++) 
             {
                 for (int v = 0; v < curentOrder[u].length; v++) 
                 {
-                   if(masqueGeodesique[u][v] == 0)
-                   {
-                       curentOrder[u][v] = 0;
-                   } 
+                    if(masqueGeodesique[u][v] == 0)
+                    {
+                        curentOrder[u][v] = 0;
+                    } 
                 }
-  
+
             }
             
             dif =0;
@@ -62,8 +61,8 @@ public class MorphoComplexe {
             {
                 for (int v = 0; v < curentOrder[u].length; v++) 
                 {
-                   dif += Math.abs(curentOrder[u][v]-oldOrder[u][v]); 
-                }
+                    dif += Math.abs(curentOrder[u][v]-oldOrder[u][v]); 
+                }   
             }
             oldOrder = curentOrder;
         
@@ -108,12 +107,11 @@ public class MorphoComplexe {
                 }
             }
         }
-                 
         
         switch(list.length%2)
         {
             case 0:
-               return (int) (0.5*(list[(int)(list.length/2)]+list[(int)((list.length/2)-1)]));
+                return (int) (0.5*(list[(int)(list.length/2)]+list[(int)((list.length/2)-1)]));
             case 1:
             default :
                 return list[(int)list.length/2];  
