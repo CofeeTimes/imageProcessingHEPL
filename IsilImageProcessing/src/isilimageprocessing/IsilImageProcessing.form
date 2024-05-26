@@ -336,17 +336,17 @@
                 </MenuItem>
               </SubComponents>
             </Menu>
-            <Menu class="javax.swing.JMenu" name="jMenu1">
+            <Menu class="javax.swing.JMenu" name="jMenuLocal">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Local"/>
               </Properties>
               <SubComponents>
-                <MenuItem class="javax.swing.JMenuItem" name="jMenuItem2">
+                <MenuItem class="javax.swing.JMenuItem" name="jMenuItemConvolutionMask">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Masque de convolution"/>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem2ActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItemConvolutionMaskActionPerformed"/>
                   </Events>
                 </MenuItem>
                 <MenuItem class="javax.swing.JMenuItem" name="MoyenneurItem">
@@ -361,12 +361,12 @@
             </Menu>
           </SubComponents>
         </Menu>
-        <Menu class="javax.swing.JMenu" name="jMenu2">
+        <Menu class="javax.swing.JMenu" name="jMenuNonLinear">
           <Properties>
             <Property name="text" type="java.lang.String" value="Traitement Non-lin&#xe9;aire"/>
           </Properties>
           <SubComponents>
-            <Menu class="javax.swing.JMenu" name="jMenu3">
+            <Menu class="javax.swing.JMenu" name="jMenuElementaire">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Elementaire"/>
               </Properties>
@@ -405,7 +405,7 @@
                 </MenuItem>
               </SubComponents>
             </Menu>
-            <Menu class="javax.swing.JMenu" name="jMenu4">
+            <Menu class="javax.swing.JMenu" name="jMenuComplexe">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Complexe"/>
               </Properties>
@@ -438,12 +438,12 @@
             </Menu>
           </SubComponents>
         </Menu>
-        <Menu class="javax.swing.JMenu" name="jMenu6">
+        <Menu class="javax.swing.JMenu" name="jMenuContours">
           <Properties>
             <Property name="text" type="java.lang.String" value="Contours"/>
           </Properties>
           <SubComponents>
-            <Menu class="javax.swing.JMenu" name="jMenu7">
+            <Menu class="javax.swing.JMenu" name="jMenuLineaire">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Lineaire"/>
               </Properties>
@@ -482,7 +482,7 @@
                 </MenuItem>
               </SubComponents>
             </Menu>
-            <Menu class="javax.swing.JMenu" name="jMenu8">
+            <Menu class="javax.swing.JMenu" name="jMenuNonLineaire">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Non-Lineaire"/>
               </Properties>
@@ -523,7 +523,7 @@
             </Menu>
           </SubComponents>
         </Menu>
-        <Menu class="javax.swing.JMenu" name="jMenu9">
+        <Menu class="javax.swing.JMenu" name="jMenuSeuillage">
           <Properties>
             <Property name="text" type="java.lang.String" value="Seuillage"/>
           </Properties>
