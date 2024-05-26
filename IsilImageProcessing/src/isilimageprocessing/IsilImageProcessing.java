@@ -2393,7 +2393,7 @@ public class IsilImageProcessing extends javax.swing.JFrame implements ClicListe
     }//GEN-LAST:event_Partie7ItemActionPerformed
 
     private void Partie1ItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Partie1ItemActionPerformed
-       if (imageNG == null) 
+        if (imageNG == null) 
         {
             JOptionPane.showMessageDialog(this, "No grayscale image loaded.", "Error", JOptionPane.ERROR_MESSAGE);
             return;
@@ -2419,7 +2419,28 @@ public class IsilImageProcessing extends javax.swing.JFrame implements ClicListe
     }//GEN-LAST:event_Partir4ActionPerformed
 
     private void Partie5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Partie5ActionPerformed
-        // TODO add your handling code here:
+        if (imageNG == null) 
+        {
+            JOptionPane.showMessageDialog(this, "No grayscale image loaded.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        try{
+            // I hate Martin Van De Bash -> hardcoded values in the gui :dead:
+            double[][] masque = new double[][] {
+                {0, -1, 0},
+                {-1, 5, -1},
+                {0, -1, 0}
+            };
+            int[][] imgFiltrer = FiltrageLineaireLocal.filtreMasqueConvolution(imageNG.getMatrice(),masque);
+            imgFiltrer = MorphoElementaire.ouverture(imgFiltrer,3);
+            imgFiltrer = Seuillage.seuillageSimple(imgFiltrer, 145);
+            imageNG.setMatrice(imgFiltrer);
+            observer.setCImage(imageNG);
+            System.out.println("end");
+        }catch(Exception e)
+        {
+            JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
         
     }//GEN-LAST:event_Partie5ActionPerformed
     
