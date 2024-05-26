@@ -75,11 +75,10 @@ public class GlobalLinearFiltering {
                 imageFiltered[u][v] = value;
             }
         }
-   
         return imageFiltered;
     }
     
-     /*
+    /*
     -----------------------------
     Global Ideal High Pass Filter
     -----------------------------
@@ -117,7 +116,6 @@ public class GlobalLinearFiltering {
         
         // Image Filtered
         int[][] imageFiltered = toDoubleToInt(inverseFourier, M, N);
-   
         return imageFiltered;
     }
     
@@ -155,7 +153,7 @@ public class GlobalLinearFiltering {
         
         // Filtered
         int[][] imageFiltered = toDoubleToInt(inverseFourier, M, N);
-   
+
         return imageFiltered; 
     }
     
@@ -193,7 +191,6 @@ public class GlobalLinearFiltering {
         
         // Filtered
         int[][] imageFiltered = toDoubleToInt(inverseFourier, M, N);
-   
         return imageFiltered; 
     }
     

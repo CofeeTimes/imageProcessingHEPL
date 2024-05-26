@@ -1201,8 +1201,8 @@ public class IsilImageProcessing extends javax.swing.JFrame implements ClicListe
         
         try
         {
-         int confirmChoice = JOptionPane.showConfirmDialog(this, masquePanel, "Donnée les valeur du masque:", JOptionPane.OK_CANCEL_OPTION);
-         if (confirmChoice == JOptionPane.OK_OPTION) 
+            int confirmChoice = JOptionPane.showConfirmDialog(this, masquePanel, "Donnée les valeur du masque:", JOptionPane.OK_CANCEL_OPTION);
+            if (confirmChoice == JOptionPane.OK_OPTION) 
             {
                 int tail = Integer.parseInt(masqueTail.getText());
                 if(tail % 2 == 0)
@@ -1225,7 +1225,7 @@ public class IsilImageProcessing extends javax.swing.JFrame implements ClicListe
     }//GEN-LAST:event_MoyenneurItemActionPerformed
 
     private void DilatationItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DilatationItemActionPerformed
-       if (imageNG == null) 
+        if (imageNG == null) 
         {
             JOptionPane.showMessageDialog(this, "No grayscale image loaded.", "Error", JOptionPane.ERROR_MESSAGE);
             return;
@@ -1239,8 +1239,8 @@ public class IsilImageProcessing extends javax.swing.JFrame implements ClicListe
         
         try
         {
-         int confirmChoice = JOptionPane.showConfirmDialog(this, masquePanel, "Donnée les valeur du masque:", JOptionPane.OK_CANCEL_OPTION);
-         if (confirmChoice == JOptionPane.OK_OPTION) 
+            int confirmChoice = JOptionPane.showConfirmDialog(this, masquePanel, "Donnée les valeur du masque:", JOptionPane.OK_CANCEL_OPTION);
+            if (confirmChoice == JOptionPane.OK_OPTION) 
             {
                 int tail = Integer.parseInt(masqueTail.getText());
                 if(tail % 2 == 0)
@@ -1261,7 +1261,7 @@ public class IsilImageProcessing extends javax.swing.JFrame implements ClicListe
     }//GEN-LAST:event_DilatationItemActionPerformed
 
     private void ErosionItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ErosionItemActionPerformed
-       if (imageNG == null) 
+        if (imageNG == null) 
         {
             JOptionPane.showMessageDialog(this, "No grayscale image loaded.", "Error", JOptionPane.ERROR_MESSAGE);
             return;
@@ -1275,8 +1275,8 @@ public class IsilImageProcessing extends javax.swing.JFrame implements ClicListe
         
         try
         {
-         int confirmChoice = JOptionPane.showConfirmDialog(this, masquePanel, "Donnée les valeur du masque:", JOptionPane.OK_CANCEL_OPTION);
-         if (confirmChoice == JOptionPane.OK_OPTION) 
+            int confirmChoice = JOptionPane.showConfirmDialog(this, masquePanel, "Donnée les valeur du masque:", JOptionPane.OK_CANCEL_OPTION);
+            if (confirmChoice == JOptionPane.OK_OPTION) 
             {
                 int tail = Integer.parseInt(masqueTail.getText());
                 if(tail % 2 == 0)
@@ -1297,7 +1297,7 @@ public class IsilImageProcessing extends javax.swing.JFrame implements ClicListe
     }//GEN-LAST:event_ErosionItemActionPerformed
 
     private void OuvertureItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OuvertureItemActionPerformed
-      if (imageNG == null) 
+        if (imageNG == null) 
         {
             JOptionPane.showMessageDialog(this, "No grayscale image loaded.", "Error", JOptionPane.ERROR_MESSAGE);
             return;
@@ -1311,8 +1311,8 @@ public class IsilImageProcessing extends javax.swing.JFrame implements ClicListe
         
         try
         {
-         int confirmChoice = JOptionPane.showConfirmDialog(this, masquePanel, "Donnée les valeur du masque:", JOptionPane.OK_CANCEL_OPTION);
-         if (confirmChoice == JOptionPane.OK_OPTION) 
+            int confirmChoice = JOptionPane.showConfirmDialog(this, masquePanel, "Donnée les valeur du masque:", JOptionPane.OK_CANCEL_OPTION);
+            if (confirmChoice == JOptionPane.OK_OPTION) 
             {
                 int tail = Integer.parseInt(masqueTail.getText());
                 if(tail % 2 == 0)
@@ -1348,8 +1348,8 @@ public class IsilImageProcessing extends javax.swing.JFrame implements ClicListe
         
         try
         {
-         int confirmChoice = JOptionPane.showConfirmDialog(this, masquePanel, "Donnée les valeur du masque:", JOptionPane.OK_CANCEL_OPTION);
-         if (confirmChoice == JOptionPane.OK_OPTION) 
+            int confirmChoice = JOptionPane.showConfirmDialog(this, masquePanel, "Donnée les valeur du masque:", JOptionPane.OK_CANCEL_OPTION);
+            if (confirmChoice == JOptionPane.OK_OPTION) 
             {
                 int tail = Integer.parseInt(masqueTail.getText());
                 if(tail % 2 == 0)
@@ -1430,7 +1430,6 @@ public class IsilImageProcessing extends javax.swing.JFrame implements ClicListe
     }//GEN-LAST:event_DilGeoItemActionPerformed
 
     private void RecGeoItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RecGeoItemActionPerformed
-          
         if (imageNG == null) 
         {
             JOptionPane.showMessageDialog(this, "No grayscale image loaded.", "Error", JOptionPane.ERROR_MESSAGE);
@@ -1469,15 +1468,15 @@ public class IsilImageProcessing extends javax.swing.JFrame implements ClicListe
             masquePanel.add(new JLabel("Tail de l'élément structurant :"));
             masquePanel.add(tailField);
             
-             int confirmChoice = JOptionPane.showConfirmDialog(this, masquePanel, "Donnée les valeur du masque:", JOptionPane.OK_CANCEL_OPTION);
-             if (confirmChoice == JOptionPane.OK_OPTION) 
-             {
+            int confirmChoice = JOptionPane.showConfirmDialog(this, masquePanel, "Donnée les valeur du masque:", JOptionPane.OK_CANCEL_OPTION);
+            if (confirmChoice == JOptionPane.OK_OPTION) 
+            {
                 int tail = Integer.parseInt(tailField.getText());  
                 int[][] imgFiltrer = MorphoComplexe.reconstructionGeodesique(imageNG.getMatrice(),masqueGeo.getMatrice(), tail);
                 imageNG.setMatrice(imgFiltrer);
                 observer.setCImage(imageNG);
                 System.out.println("end");
-             }
+                }
         }catch(Exception e)
             {
                 JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
@@ -1499,8 +1498,8 @@ public class IsilImageProcessing extends javax.swing.JFrame implements ClicListe
         
         try
         {
-         int confirmChoice = JOptionPane.showConfirmDialog(this, masquePanel, "Donnée les valeur du masque:", JOptionPane.OK_CANCEL_OPTION);
-         if (confirmChoice == JOptionPane.OK_OPTION) 
+            int confirmChoice = JOptionPane.showConfirmDialog(this, masquePanel, "Donnée les valeur du masque:", JOptionPane.OK_CANCEL_OPTION);
+            if (confirmChoice == JOptionPane.OK_OPTION) 
             {
                 int tail = Integer.parseInt(masqueTail.getText());
                 if(tail % 2 == 0)
@@ -1521,7 +1520,7 @@ public class IsilImageProcessing extends javax.swing.JFrame implements ClicListe
     }//GEN-LAST:event_MedItemActionPerformed
 
     private void AfficheItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AfficheItem2ActionPerformed
-      if (imageNG == null) 
+        if (imageNG == null) 
         {
             JOptionPane.showMessageDialog(this, "No grayscale image loaded.", "Error", JOptionPane.ERROR_MESSAGE);
             return;
@@ -1537,14 +1536,14 @@ public class IsilImageProcessing extends javax.swing.JFrame implements ClicListe
         
         }catch (Exception e)
         {
-           JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);  
+            JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);  
         }
         
         
     }//GEN-LAST:event_AfficheItem2ActionPerformed
 
     private void EgalisationItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EgalisationItemActionPerformed
-       int[] histo;
+        int[] histo;
         try 
         {
             int f_int[][] = imageNG.getMatrice();
@@ -1576,9 +1575,9 @@ public class IsilImageProcessing extends javax.swing.JFrame implements ClicListe
         }
         catch(Exception e)
         {
-         JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);   
+            JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);   
         }
-             
+        
     }//GEN-LAST:event_EgalisationItemActionPerformed
 
     private void SaturationItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaturationItemActionPerformed
@@ -1604,13 +1603,13 @@ public class IsilImageProcessing extends javax.swing.JFrame implements ClicListe
         masquePanel.add(Box.createHorizontalStrut(15)); 
         masquePanel.add(new JLabel("max saturation :")); 
         masquePanel.add(maxField);
-   
+
         int confirmChoice = JOptionPane.showConfirmDialog(this, masquePanel, "Donnée les valeur du masque:", JOptionPane.OK_CANCEL_OPTION);
         if (confirmChoice == JOptionPane.OK_OPTION) 
-             {
-                try{
-                 int min=Integer.parseInt(minField.getText());
-                 int max =Integer.parseInt(maxField.getText()); 
+        {
+            try{
+                int min=Integer.parseInt(minField.getText());
+                int max =Integer.parseInt(maxField.getText()); 
                 int[][] imgFiltrer = Histogramme.rehaussement(imageNG.getMatrice(), Histogramme.creeCourbeTonaleLineaireSaturation(min, max));
                 imageNG.setMatrice(imgFiltrer);
                 observer.setCImage(imageNG);
@@ -1626,16 +1625,15 @@ public class IsilImageProcessing extends javax.swing.JFrame implements ClicListe
                     return;
                 }
                 MakeHisto(histo,"Avec Saturation","Avec Saturation");
-                }
-                catch(Exception e)
-                {
-                 JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);   
-                }
-             }  
+            }
+            catch(Exception e)
+            {
+                JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);   
+            }
+        }  
     }//GEN-LAST:event_SaturationItemActionPerformed
     
     private void GammaItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GammaItemActionPerformed
-      
         int[] histo;
         try 
         {
@@ -1653,12 +1651,11 @@ public class IsilImageProcessing extends javax.swing.JFrame implements ClicListe
         JPanel masquePanel = new JPanel();
         masquePanel.add(new JLabel("gamme :")); 
         masquePanel.add(gammaField); 
-   
         int confirmChoice = JOptionPane.showConfirmDialog(this, masquePanel, "Donnée les valeur du masque:", JOptionPane.OK_CANCEL_OPTION);
         if (confirmChoice == JOptionPane.OK_OPTION) 
-             {
-                try{
-                 double gamma=Double.parseDouble(gammaField.getText());
+        {
+            try{
+                double gamma=Double.parseDouble(gammaField.getText());
                 int[][] imgFiltrer = Histogramme.rehaussement(imageNG.getMatrice(), Histogramme.creeCourbeTonaleGamma(gamma));
                 imageNG.setMatrice(imgFiltrer);
                 observer.setCImage(imageNG);
@@ -1677,13 +1674,13 @@ public class IsilImageProcessing extends javax.swing.JFrame implements ClicListe
                 }
                 catch(Exception e)
                 {
-                 JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);   
+                    JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);   
                 }
-             }
+        }
     }//GEN-LAST:event_GammaItemActionPerformed
 
     private void NegatifItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NegatifItemActionPerformed
-       int[] histo;
+        int[] histo;
         try 
         {
             int f_int[][] = imageNG.getMatrice();
@@ -1694,7 +1691,6 @@ public class IsilImageProcessing extends javax.swing.JFrame implements ClicListe
             System.out.println("Erreur CImageNG : " + ex.getMessage());
             return;
         }
-
         MakeHisto(histo,"Avant Negatif","Avant Negatif");
         try{
         int[][] imgFiltrer = Histogramme.rehaussement(imageNG.getMatrice(), Histogramme.creeCourbeTonaleNegatif());
@@ -1715,7 +1711,7 @@ public class IsilImageProcessing extends javax.swing.JFrame implements ClicListe
         }
         catch(Exception e)
         {
-         JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);   
+            JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);   
         }
     }//GEN-LAST:event_NegatifItemActionPerformed
 
@@ -1731,15 +1727,15 @@ public class IsilImageProcessing extends javax.swing.JFrame implements ClicListe
         masquePanel.add(new JLabel("Direction du filtre Prewitt :"));
         masquePanel.add(dirField);
 
-         int confirmChoice = JOptionPane.showConfirmDialog(this, masquePanel, "Donnée les valeur du masque:", JOptionPane.OK_CANCEL_OPTION);
-         if (confirmChoice == JOptionPane.OK_OPTION) 
-         {
+        int confirmChoice = JOptionPane.showConfirmDialog(this, masquePanel, "Donnée les valeur du masque:", JOptionPane.OK_CANCEL_OPTION);
+        if (confirmChoice == JOptionPane.OK_OPTION) 
+        {
             int dir = Integer.parseInt(dirField.getText());  
             int[][] imgFiltrer = ContoursLineaire.gradientPrewitt(imageNG.getMatrice(),dir);
             imageNG.setMatrice(imgFiltrer);
             observer.setCImage(imageNG);
             System.out.println("end");
-         }
+        }
         }catch(Exception e)
         {
             JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
@@ -1760,15 +1756,15 @@ public class IsilImageProcessing extends javax.swing.JFrame implements ClicListe
         masquePanel.add(new JLabel("Direction du filtre Sobel :"));
         masquePanel.add(dirField);
 
-         int confirmChoice = JOptionPane.showConfirmDialog(this, masquePanel, "Donnée les valeur du masque:", JOptionPane.OK_CANCEL_OPTION);
-         if (confirmChoice == JOptionPane.OK_OPTION) 
-         {
+        int confirmChoice = JOptionPane.showConfirmDialog(this, masquePanel, "Donnée les valeur du masque:", JOptionPane.OK_CANCEL_OPTION);
+        if (confirmChoice == JOptionPane.OK_OPTION) 
+        {
             int dir = Integer.parseInt(dirField.getText());  
             int[][] imgFiltrer = ContoursLineaire.gradientSobel(imageNG.getMatrice(),dir);
             imageNG.setMatrice(imgFiltrer);
             observer.setCImage(imageNG);
             System.out.println("end");
-         }
+        }
         }catch(Exception e)
         {
             JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
@@ -1776,7 +1772,7 @@ public class IsilImageProcessing extends javax.swing.JFrame implements ClicListe
     }//GEN-LAST:event_SobelItemActionPerformed
 
     private void Laplace4ITemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Laplace4ITemActionPerformed
-       if (imageNG == null) 
+        if (imageNG == null) 
         {
             JOptionPane.showMessageDialog(this, "No grayscale image loaded.", "Error", JOptionPane.ERROR_MESSAGE);
             return;
@@ -1810,7 +1806,7 @@ public class IsilImageProcessing extends javax.swing.JFrame implements ClicListe
     }//GEN-LAST:event_Laplace8ItemActionPerformed
 
     private void gEroItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gEroItemActionPerformed
-       if (imageNG == null) 
+        if (imageNG == null) 
         {
             JOptionPane.showMessageDialog(this, "No grayscale image loaded.", "Error", JOptionPane.ERROR_MESSAGE);
             return;
@@ -1827,7 +1823,7 @@ public class IsilImageProcessing extends javax.swing.JFrame implements ClicListe
     }//GEN-LAST:event_gEroItemActionPerformed
 
     private void gDilItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gDilItemActionPerformed
-       if (imageNG == null) 
+        if (imageNG == null) 
         {
             JOptionPane.showMessageDialog(this, "No grayscale image loaded.", "Error", JOptionPane.ERROR_MESSAGE);
             return;
@@ -1844,7 +1840,7 @@ public class IsilImageProcessing extends javax.swing.JFrame implements ClicListe
     }//GEN-LAST:event_gDilItemActionPerformed
 
     private void gBeuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gBeuItemActionPerformed
-       if (imageNG == null) 
+        if (imageNG == null) 
         {
             JOptionPane.showMessageDialog(this, "No grayscale image loaded.", "Error", JOptionPane.ERROR_MESSAGE);
             return;
@@ -1878,7 +1874,7 @@ public class IsilImageProcessing extends javax.swing.JFrame implements ClicListe
     }//GEN-LAST:event_LNLItemActionPerformed
 
     private void SeuillageItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SeuillageItemActionPerformed
-       if (imageNG == null) 
+        if (imageNG == null) 
         {
             JOptionPane.showMessageDialog(this, "No grayscale image loaded.", "Error", JOptionPane.ERROR_MESSAGE);
             return;
@@ -1889,15 +1885,15 @@ public class IsilImageProcessing extends javax.swing.JFrame implements ClicListe
         masquePanel.add(new JLabel("Seuille :"));
         masquePanel.add(seuilleField);
 
-         int confirmChoice = JOptionPane.showConfirmDialog(this, masquePanel, "Donnée les valeur du masque:", JOptionPane.OK_CANCEL_OPTION);
-         if (confirmChoice == JOptionPane.OK_OPTION) 
-         {
+        int confirmChoice = JOptionPane.showConfirmDialog(this, masquePanel, "Donnée les valeur du masque:", JOptionPane.OK_CANCEL_OPTION);
+        if (confirmChoice == JOptionPane.OK_OPTION) 
+        {
             int seuille = Integer.parseInt(seuilleField.getText());  
             int[][] imgFiltrer = Seuillage.seuillageSimple(imageNG.getMatrice(),seuille);
             imageNG.setMatrice(imgFiltrer);
             observer.setCImage(imageNG);
             System.out.println("end");
-         }
+        }
         }catch(Exception e)
         {
             JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
@@ -1905,7 +1901,7 @@ public class IsilImageProcessing extends javax.swing.JFrame implements ClicListe
     }//GEN-LAST:event_SeuillageItemActionPerformed
 
     private void SeuilAutoItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SeuilAutoItemActionPerformed
-     if (imageNG == null) 
+        if (imageNG == null) 
         {
             JOptionPane.showMessageDialog(this, "No grayscale image loaded.", "Error", JOptionPane.ERROR_MESSAGE);
             return;

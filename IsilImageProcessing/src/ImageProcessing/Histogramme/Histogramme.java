@@ -54,7 +54,7 @@ public class Histogramme
     }
     public static int luminance(int[][] image) 
     {
-       int M = image.length;
+        int M = image.length;
         int N = image[0].length;
         int sum = 0;
         
@@ -98,7 +98,7 @@ public class Histogramme
         {
             for (int v = 0; v < N; v++) 
             {
-               ret[u][v] = courbeTonale[image[u][v]]; 
+                ret[u][v] = courbeTonale[image[u][v]]; 
             }
         }
         return ret;
@@ -136,7 +136,7 @@ public class Histogramme
     }
     public static int[] creeCourbeTonaleNegatif() 
     {
-       int[] ret = new int[256];
+        int[] ret = new int[256];
         
         for (int i = 0; i < 256; i++) 
         {

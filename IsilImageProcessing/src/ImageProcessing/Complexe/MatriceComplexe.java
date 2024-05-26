@@ -59,7 +59,7 @@ public class MatriceComplexe
                 d[i][j] = m[i][j].getModule();
         return d;
     }
-     
+
     public double[][] getPhase()
     {
         double d[][] = new double[lignes][colonnes];
