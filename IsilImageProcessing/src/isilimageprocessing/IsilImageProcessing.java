@@ -78,7 +78,7 @@ public class IsilImageProcessing extends javax.swing.JFrame implements ClicListe
         buttonGroupDessiner = new javax.swing.ButtonGroup();
         jPopupMenu1 = new javax.swing.JPopupMenu();
         jScrollPane = new javax.swing.JScrollPane();
-        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenuGeneral = new javax.swing.JMenuBar();
         jMenuImage = new javax.swing.JMenu();
         jMenuNouvelle = new javax.swing.JMenu();
         jMenuItemNouvelleRGB = new javax.swing.JMenuItem();
@@ -145,15 +145,17 @@ public class IsilImageProcessing extends javax.swing.JFrame implements ClicListe
         jMenuSeuillage = new javax.swing.JMenu();
         SeuillageItem = new javax.swing.JMenuItem();
         SeuilAutoItem = new javax.swing.JMenuItem();
-        jMenu11 = new javax.swing.JMenu();
+        jMenuFinalQuestion = new javax.swing.JMenu();
         Partie1Item = new javax.swing.JMenuItem();
-        jMenu13 = new javax.swing.JMenu();
+        Partie2 = new javax.swing.JMenu();
         RGBEgalItem = new javax.swing.JMenuItem();
         LumEgalItem = new javax.swing.JMenuItem();
-        jMenu10 = new javax.swing.JMenu();
+        Partie3 = new javax.swing.JMenu();
         RougeItem = new javax.swing.JMenuItem();
         BleuItem = new javax.swing.JMenuItem();
-        jMenu12 = new javax.swing.JMenu();
+        Partir4 = new javax.swing.JMenuItem();
+        Partie5 = new javax.swing.JMenuItem();
+        Partie6 = new javax.swing.JMenu();
         Point6Item = new javax.swing.JMenuItem();
         Point62Item = new javax.swing.JMenuItem();
         Partie7Item = new javax.swing.JMenuItem();
@@ -225,7 +227,7 @@ public class IsilImageProcessing extends javax.swing.JFrame implements ClicListe
         });
         jMenuImage.add(jMenuQuitter);
 
-        jMenuBar1.add(jMenuImage);
+        jMenuGeneral.add(jMenuImage);
 
         jMenuDessiner.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/Display 28_p1.jpg"))); // NOI18N
         jMenuDessiner.setText("Dessiner");
@@ -288,7 +290,7 @@ public class IsilImageProcessing extends javax.swing.JFrame implements ClicListe
         });
         jMenuDessiner.add(jCheckBoxMenuItemDessinerCerclePlein);
 
-        jMenuBar1.add(jMenuDessiner);
+        jMenuGeneral.add(jMenuDessiner);
 
         jMenuFourier.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/CP 51_p1.jpg"))); // NOI18N
         jMenuFourier.setText("Fourier");
@@ -330,7 +332,7 @@ public class IsilImageProcessing extends javax.swing.JFrame implements ClicListe
 
         jMenuFourier.add(jMenuFourierAfficher);
 
-        jMenuBar1.add(jMenuFourier);
+        jMenuGeneral.add(jMenuFourier);
 
         jMenuHistogramme.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/report_48_hot.jpg"))); // NOI18N
         jMenuHistogramme.setText("Histogramme");
@@ -389,7 +391,7 @@ public class IsilImageProcessing extends javax.swing.JFrame implements ClicListe
 
         jMenuHistogramme.add(jMenu5);
 
-        jMenuBar1.add(jMenuHistogramme);
+        jMenuGeneral.add(jMenuHistogramme);
 
         jMenuLinearFiltering.setText("Linear Filtering");
 
@@ -449,7 +451,7 @@ public class IsilImageProcessing extends javax.swing.JFrame implements ClicListe
 
         jMenuLinearFiltering.add(jMenuLocal);
 
-        jMenuBar1.add(jMenuLinearFiltering);
+        jMenuGeneral.add(jMenuLinearFiltering);
 
         jMenuNonLinear.setText("Traitement Non-linéaire");
 
@@ -517,7 +519,7 @@ public class IsilImageProcessing extends javax.swing.JFrame implements ClicListe
 
         jMenuNonLinear.add(jMenuComplexe);
 
-        jMenuBar1.add(jMenuNonLinear);
+        jMenuGeneral.add(jMenuNonLinear);
 
         jMenuContours.setText("Contours");
 
@@ -593,7 +595,7 @@ public class IsilImageProcessing extends javax.swing.JFrame implements ClicListe
 
         jMenuContours.add(jMenuNonLineaire);
 
-        jMenuBar1.add(jMenuContours);
+        jMenuGeneral.add(jMenuContours);
 
         jMenuSeuillage.setText("Seuillage");
 
@@ -613,9 +615,9 @@ public class IsilImageProcessing extends javax.swing.JFrame implements ClicListe
         });
         jMenuSeuillage.add(SeuilAutoItem);
 
-        jMenuBar1.add(jMenuSeuillage);
+        jMenuGeneral.add(jMenuSeuillage);
 
-        jMenu11.setText("Etape 5");
+        jMenuFinalQuestion.setText("Etape 5");
 
         Partie1Item.setText("1");
         Partie1Item.addActionListener(new java.awt.event.ActionListener() {
@@ -623,9 +625,9 @@ public class IsilImageProcessing extends javax.swing.JFrame implements ClicListe
                 Partie1ItemActionPerformed(evt);
             }
         });
-        jMenu11.add(Partie1Item);
+        jMenuFinalQuestion.add(Partie1Item);
 
-        jMenu13.setText("2");
+        Partie2.setText("2");
 
         RGBEgalItem.setText("Egalisation RGB");
         RGBEgalItem.addActionListener(new java.awt.event.ActionListener() {
@@ -633,7 +635,7 @@ public class IsilImageProcessing extends javax.swing.JFrame implements ClicListe
                 RGBEgalItemActionPerformed(evt);
             }
         });
-        jMenu13.add(RGBEgalItem);
+        Partie2.add(RGBEgalItem);
 
         LumEgalItem.setText("Egalisation Luminance");
         LumEgalItem.addActionListener(new java.awt.event.ActionListener() {
@@ -641,11 +643,11 @@ public class IsilImageProcessing extends javax.swing.JFrame implements ClicListe
                 LumEgalItemActionPerformed(evt);
             }
         });
-        jMenu13.add(LumEgalItem);
+        Partie2.add(LumEgalItem);
 
-        jMenu11.add(jMenu13);
+        jMenuFinalQuestion.add(Partie2);
 
-        jMenu10.setText("3");
+        Partie3.setText("3");
 
         RougeItem.setText("Convertir RGB -> Rouge");
         RougeItem.addActionListener(new java.awt.event.ActionListener() {
@@ -653,7 +655,7 @@ public class IsilImageProcessing extends javax.swing.JFrame implements ClicListe
                 RougeItemActionPerformed(evt);
             }
         });
-        jMenu10.add(RougeItem);
+        Partie3.add(RougeItem);
 
         BleuItem.setText("Convertir RGB -> Bleu");
         BleuItem.addActionListener(new java.awt.event.ActionListener() {
@@ -661,11 +663,17 @@ public class IsilImageProcessing extends javax.swing.JFrame implements ClicListe
                 BleuItemActionPerformed(evt);
             }
         });
-        jMenu10.add(BleuItem);
+        Partie3.add(BleuItem);
 
-        jMenu11.add(jMenu10);
+        jMenuFinalQuestion.add(Partie3);
 
-        jMenu12.setText("6");
+        Partir4.setText("4");
+        jMenuFinalQuestion.add(Partir4);
+
+        Partie5.setText("5");
+        jMenuFinalQuestion.add(Partie5);
+
+        Partie6.setText("6");
 
         Point6Item.setText("6.1");
         Point6Item.addActionListener(new java.awt.event.ActionListener() {
@@ -673,7 +681,7 @@ public class IsilImageProcessing extends javax.swing.JFrame implements ClicListe
                 Point6ItemActionPerformed(evt);
             }
         });
-        jMenu12.add(Point6Item);
+        Partie6.add(Point6Item);
 
         Point62Item.setText("6.2");
         Point62Item.addActionListener(new java.awt.event.ActionListener() {
@@ -681,9 +689,9 @@ public class IsilImageProcessing extends javax.swing.JFrame implements ClicListe
                 Point62ItemActionPerformed(evt);
             }
         });
-        jMenu12.add(Point62Item);
+        Partie6.add(Point62Item);
 
-        jMenu11.add(jMenu12);
+        jMenuFinalQuestion.add(Partie6);
 
         Partie7Item.setText("7");
         Partie7Item.addActionListener(new java.awt.event.ActionListener() {
@@ -691,11 +699,11 @@ public class IsilImageProcessing extends javax.swing.JFrame implements ClicListe
                 Partie7ItemActionPerformed(evt);
             }
         });
-        jMenu11.add(Partie7Item);
+        jMenuFinalQuestion.add(Partie7Item);
 
-        jMenuBar1.add(jMenu11);
+        jMenuGeneral.add(jMenuFinalQuestion);
 
-        setJMenuBar(jMenuBar1);
+        setJMenuBar(jMenuGeneral);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -2553,7 +2561,12 @@ public class IsilImageProcessing extends javax.swing.JFrame implements ClicListe
     private javax.swing.JMenuItem NegatifItem;
     private javax.swing.JMenuItem OuvertureItem;
     private javax.swing.JMenuItem Partie1Item;
+    private javax.swing.JMenu Partie2;
+    private javax.swing.JMenu Partie3;
+    private javax.swing.JMenuItem Partie5;
+    private javax.swing.JMenu Partie6;
     private javax.swing.JMenuItem Partie7Item;
+    private javax.swing.JMenuItem Partir4;
     private javax.swing.JMenuItem Point62Item;
     private javax.swing.JMenuItem Point6Item;
     private javax.swing.JMenuItem PrewittItem;
@@ -2574,22 +2587,15 @@ public class IsilImageProcessing extends javax.swing.JFrame implements ClicListe
     private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItemDessinerPixel;
     private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItemDessinerRectangle;
     private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItemDessinerRectanglePlein;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu10;
-    private javax.swing.JMenu jMenu11;
-    private javax.swing.JMenu jMenu12;
-    private javax.swing.JMenu jMenu13;
-    private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenu jMenu3;
-    private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu5;
-    private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenu jMenuComplexe;
     private javax.swing.JMenu jMenuContours;
     private javax.swing.JMenu jMenuDessiner;
     private javax.swing.JMenu jMenuElementaire;
+    private javax.swing.JMenu jMenuFinalQuestion;
     private javax.swing.JMenu jMenuFourier;
     private javax.swing.JMenu jMenuFourierAfficher;
+    private javax.swing.JMenuBar jMenuGeneral;
     private javax.swing.JMenu jMenuGlobal;
     private javax.swing.JMenu jMenuHistogramme;
     private javax.swing.JMenuItem jMenuHistogrammeAfficher;
