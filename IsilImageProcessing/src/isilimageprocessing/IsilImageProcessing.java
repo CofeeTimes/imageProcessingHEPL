@@ -2413,7 +2413,7 @@ public class IsilImageProcessing extends javax.swing.JFrame implements ClicListe
     }//GEN-LAST:event_Partie1ItemActionPerformed
 
     private void Partir4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Partir4ActionPerformed
-        // TODO add your handling code here:
+        // TODO add your handling code here: isi
         
         
     }//GEN-LAST:event_Partir4ActionPerformed
