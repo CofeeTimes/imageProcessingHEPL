@@ -2400,7 +2400,8 @@ public class IsilImageProcessing extends javax.swing.JFrame implements ClicListe
         }
         try
         {
-                int[][] imgFiltrer = FiltrageLineaireLocal.filtreMoyenneur(imageNG.getMatrice(),5);
+                // int[][] imgFiltrer = FiltrageLineaireLocal.filtreMoyenneur(imageNG.getMatrice(),5);
+                int[][] imgFiltrer = MorphoComplexe.filtreMedian(imageNG.getMatrice(),5);
                 imageNG.setMatrice(imgFiltrer);
                 observer.setCImage(imageNG);
                 System.out.println("end");
@@ -2414,6 +2415,28 @@ public class IsilImageProcessing extends javax.swing.JFrame implements ClicListe
 
     private void Partir4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Partir4ActionPerformed
         // TODO add your handling code here: isi
+        
+        if (imageNG == null) 
+        {
+            JOptionPane.showMessageDialog(this, "No grayscale image loaded.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        try
+        {       
+                int[][] imgFiltrerBinaire = Seuillage.seuillageAutomatique(imageNG.getMatrice());
+                int[][] imgFiltrer = Seuillage.seuillageAutomatique(imageNG.getMatrice());
+                imgFiltrer = MorphoElementaire.erosion(imgFiltrer, 9);
+                imgFiltrer = MorphoElementaire.fermeture(imgFiltrer, 5);
+                imgFiltrer = MorphoComplexe.reconstructionGeodesique(imgFiltrer, imgFiltrerBinaire, 5);
+                
+                imageNG.setMatrice(imgFiltrer);
+                observer.setCImage(imageNG);
+                System.out.println("end");
+        }
+        catch(Exception e)
+        {
+            JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
         
         
     }//GEN-LAST:event_Partir4ActionPerformed
