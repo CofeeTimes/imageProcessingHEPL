@@ -31,7 +31,11 @@ public class FiltrageLineaireLocal
                    }
                    
                }
-               ret[u][v] = (int)sum;
+//                ret[u][v] = (int)sum;
+                int value = (int) Math.round(sum);
+                if (value < 0) value = 0;
+                if (value > 255) value = 255;
+                ret[u][v] = value;
            }
        }
        
