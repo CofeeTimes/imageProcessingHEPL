@@ -27,12 +27,12 @@ public class Seuillage
                     ret[u][v] = 255;
                 }
             }
-         }
+        }
         return ret;
     }
     public static int[][] seuillageDouble(int[][] image,int seuil1, int seuil2) 
     {
-      int low,high;
+        int low,high;
         if (seuil1 > seuil2) 
         {
             high = seuil1;
@@ -67,36 +67,36 @@ public class Seuillage
         int oldT = 0;
         int curentT = (Histogramme.maximum(image)- Histogramme.minimum(image)) /2;
         int[][] ret = new int[image.length][image[0].length];
-       do
-       {
-          oldT = curentT;
-          System.out.println(curentT);
-          ret = seuillageSimple(image,curentT);
-          
-          int sumG1 =0;
-          int sumG2 =0;
-          int countG1 =0;
-          int countG2 =0;
-          
-           for (int u = 0; u < ret.length; u++)
-           {
-               for (int v = 0; v < ret[0].length; v++) 
-               {
-                   if(ret[u][v] == 255)
-                   {
-                       sumG1 = sumG1 + image[u][v];
-                       countG1 ++;
-                   }else
-                   {
-                       sumG2 = sumG2 + image[u][v];
-                       countG2 ++;  
-                   }
+        do
+        {
+            oldT = curentT;
+            System.out.println(curentT);
+            ret = seuillageSimple(image,curentT);
+            
+            int sumG1 =0;
+            int sumG2 =0;
+            int countG1 =0;
+            int countG2 =0;
+            
+            for (int u = 0; u < ret.length; u++)
+            {
+                for (int v = 0; v < ret[0].length; v++) 
+                {
+                    if(ret[u][v] == 255)
+                    {
+                        sumG1 = sumG1 + image[u][v];
+                        countG1 ++;
+                    }else
+                    {
+                        sumG2 = sumG2 + image[u][v];
+                        countG2 ++;  
+                    }
                    //System.out.println(ret[u][v]);
-               }
-           }
-           curentT = (int)((((double)sumG1/countG1)+((double)sumG2/countG2))/2);
-          
-       }while(oldT != curentT);
-       return ret;
+            }
+        }
+        curentT = (int)((((double)sumG1/countG1)+((double)sumG2/countG2))/2);
+        
+        }while(oldT != curentT);
+        return ret;
     }
 }
