@@ -145,6 +145,18 @@ public class IsilImageProcessing extends javax.swing.JFrame implements ClicListe
         jMenuSeuillage = new javax.swing.JMenu();
         SeuillageItem = new javax.swing.JMenuItem();
         SeuilAutoItem = new javax.swing.JMenuItem();
+        jMenu11 = new javax.swing.JMenu();
+        Partie1Item = new javax.swing.JMenuItem();
+        jMenu13 = new javax.swing.JMenu();
+        RGBEgalItem = new javax.swing.JMenuItem();
+        LumEgalItem = new javax.swing.JMenuItem();
+        jMenu10 = new javax.swing.JMenu();
+        RougeItem = new javax.swing.JMenuItem();
+        BleuItem = new javax.swing.JMenuItem();
+        jMenu12 = new javax.swing.JMenu();
+        Point6Item = new javax.swing.JMenuItem();
+        Point62Item = new javax.swing.JMenuItem();
+        Partie7Item = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Isil Image Processing");
@@ -602,6 +614,86 @@ public class IsilImageProcessing extends javax.swing.JFrame implements ClicListe
         jMenuSeuillage.add(SeuilAutoItem);
 
         jMenuBar1.add(jMenuSeuillage);
+
+        jMenu11.setText("Etape 5");
+
+        Partie1Item.setText("1");
+        Partie1Item.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Partie1ItemActionPerformed(evt);
+            }
+        });
+        jMenu11.add(Partie1Item);
+
+        jMenu13.setText("2");
+
+        RGBEgalItem.setText("Egalisation RGB");
+        RGBEgalItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                RGBEgalItemActionPerformed(evt);
+            }
+        });
+        jMenu13.add(RGBEgalItem);
+
+        LumEgalItem.setText("Egalisation Luminance");
+        LumEgalItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                LumEgalItemActionPerformed(evt);
+            }
+        });
+        jMenu13.add(LumEgalItem);
+
+        jMenu11.add(jMenu13);
+
+        jMenu10.setText("3");
+
+        RougeItem.setText("Convertir RGB -> Rouge");
+        RougeItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                RougeItemActionPerformed(evt);
+            }
+        });
+        jMenu10.add(RougeItem);
+
+        BleuItem.setText("Convertir RGB -> Bleu");
+        BleuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BleuItemActionPerformed(evt);
+            }
+        });
+        jMenu10.add(BleuItem);
+
+        jMenu11.add(jMenu10);
+
+        jMenu12.setText("6");
+
+        Point6Item.setText("6.1");
+        Point6Item.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Point6ItemActionPerformed(evt);
+            }
+        });
+        jMenu12.add(Point6Item);
+
+        Point62Item.setText("6.2");
+        Point62Item.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Point62ItemActionPerformed(evt);
+            }
+        });
+        jMenu12.add(Point62Item);
+
+        jMenu11.add(jMenu12);
+
+        Partie7Item.setText("7");
+        Partie7Item.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Partie7ItemActionPerformed(evt);
+            }
+        });
+        jMenu11.add(Partie7Item);
+
+        jMenuBar1.add(jMenu11);
 
         setJMenuBar(jMenuBar1);
 
@@ -1916,6 +2008,391 @@ public class IsilImageProcessing extends javax.swing.JFrame implements ClicListe
             JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_SeuilAutoItemActionPerformed
+
+    private void RougeItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RougeItemActionPerformed
+     
+        if (imageRGB == null) 
+        {
+            JOptionPane.showMessageDialog(this, "No color image loaded.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        try{
+            int[][] rouge = new int[imageRGB.getLargeur()][imageRGB.getHauteur()];
+            int[][] vert= new int[imageRGB.getLargeur()][imageRGB.getHauteur()];
+            int[][] bleu= new int[imageRGB.getLargeur()][imageRGB.getHauteur()];
+            imageRGB.getMatricesRGB(rouge, vert, bleu);
+            
+            bleu = Histogramme.rehaussement(bleu, Histogramme.creeCourbeTonaleNegatif());
+            int[][] small = MorphoElementaire.erosion(bleu, 15);
+            bleu = MorphoComplexe.reconstructionGeodesique(small, bleu, 3);
+            bleu = Histogramme.rehaussement(bleu, Histogramme.creeCourbeTonaleNegatif());
+            
+            imageNG = new CImageNG(bleu);
+            imageNG.setMatrice(bleu);
+            observer.setCImage(imageNG);
+        }catch(Exception e)
+        {
+            JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_RougeItemActionPerformed
+
+    private void BleuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BleuItemActionPerformed
+       if (imageRGB == null) 
+        {
+            JOptionPane.showMessageDialog(this, "No color image loaded.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        try{
+            int[][] rouge = new int[imageRGB.getLargeur()][imageRGB.getHauteur()];
+            int[][] vert= new int[imageRGB.getLargeur()][imageRGB.getHauteur()];
+            int[][] bleu= new int[imageRGB.getLargeur()][imageRGB.getHauteur()];
+            imageRGB.getMatricesRGB(rouge, vert, bleu);
+            
+            rouge = Histogramme.rehaussement(rouge, Histogramme.creeCourbeTonaleNegatif());
+            int[][] small = MorphoElementaire.erosion(rouge, 15);
+            rouge = MorphoComplexe.reconstructionGeodesique(small, rouge, 3);
+            rouge = Histogramme.rehaussement(rouge, Histogramme.creeCourbeTonaleNegatif());
+            
+            imageNG = new CImageNG(rouge);
+            imageNG.setMatrice(rouge);
+            observer.setCImage(imageNG);
+        }catch(Exception e)
+        {
+            JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_BleuItemActionPerformed
+
+    private void RGBEgalItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RGBEgalItemActionPerformed
+       if (imageRGB == null) 
+        {
+            JOptionPane.showMessageDialog(this, "No color image loaded.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        try{
+            int[][] rouge = new int[imageRGB.getLargeur()][imageRGB.getHauteur()];
+            int[][] vert= new int[imageRGB.getLargeur()][imageRGB.getHauteur()];
+            int[][] bleu= new int[imageRGB.getLargeur()][imageRGB.getHauteur()];
+            imageRGB.getMatricesRGB(rouge, vert, bleu);
+            
+            rouge = Histogramme.rehaussement(rouge, Histogramme.creeCourbeTonaleEgalisation(rouge));
+            bleu = Histogramme.rehaussement(bleu, Histogramme.creeCourbeTonaleEgalisation(bleu));
+            vert = Histogramme.rehaussement(vert, Histogramme.creeCourbeTonaleEgalisation(vert));
+            
+            imageRGB.setMatricesRGB(rouge,vert,bleu);
+            observer.setCImage(imageRGB);
+        }catch(Exception e)
+        {
+            JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_RGBEgalItemActionPerformed
+
+    private void LumEgalItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LumEgalItemActionPerformed
+       if (imageRGB == null) 
+        {
+            JOptionPane.showMessageDialog(this, "No color image loaded.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        try{
+            int[][] rouge = new int[imageRGB.getLargeur()][imageRGB.getHauteur()];
+            int[][] vert= new int[imageRGB.getLargeur()][imageRGB.getHauteur()];
+            int[][] bleu= new int[imageRGB.getLargeur()][imageRGB.getHauteur()];
+            imageRGB.getMatricesRGB(rouge, vert, bleu);
+            int[][] gris = imageRGB.getCImageNG().getMatrice();
+            
+            rouge = Histogramme.rehaussement(rouge, Histogramme.creeCourbeTonaleEgalisation(gris));
+            bleu = Histogramme.rehaussement(bleu, Histogramme.creeCourbeTonaleEgalisation(gris));
+            vert = Histogramme.rehaussement(vert, Histogramme.creeCourbeTonaleEgalisation(gris));
+            
+            imageRGB.setMatricesRGB(rouge,vert,bleu);
+            observer.setCImage(imageRGB);
+        }catch(Exception e)
+        {
+            JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_LumEgalItemActionPerformed
+
+    private void Point6ItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Point6ItemActionPerformed
+      if (imageRGB == null) 
+        {
+            JOptionPane.showMessageDialog(this, "No color image loaded.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        try{
+            int[][] rouge = new int[imageRGB.getLargeur()][imageRGB.getHauteur()];
+            int[][] vert= new int[imageRGB.getLargeur()][imageRGB.getHauteur()];
+            int[][] bleu= new int[imageRGB.getLargeur()][imageRGB.getHauteur()];
+            imageRGB.getMatricesRGB(rouge, vert, bleu);
+            int[][] gris = imageRGB.getCImageNG().getMatrice();
+            
+            //grand Vesseau
+            int[][] outline = Seuillage.seuillageSimple(gris, 25);
+            outline = MorphoComplexe.filtreMedian(outline, 3);
+            
+            int[][] grandV = MorphoElementaire.fermeture(gris,41);
+            grandV = Seuillage.seuillageAutomatique(grandV);
+            grandV = MorphoComplexe.reconstructionGeodesique(grandV, outline, 3);
+            System.out.println("Grand vesseaux");
+            
+            //text 
+            int[][] textImg = ContoursNonLineaire.gradientErosion(gris);
+            textImg = Seuillage.seuillageSimple(textImg, 254);
+            textImg = MorphoComplexe.filtreMedian(textImg, 3);
+            textImg = MorphoElementaire.dilatation(textImg, 225);
+                        System.out.println("text");
+            
+            //suprrimer le grand vesseaux et le texte
+            for (int u = 0; u < gris.length; u++) 
+            {
+                for (int v = 0; v < gris[0].length; v++) 
+                {
+                    if(textImg[u][v] == 255 || grandV[u][v] == 255)
+                    {
+                      rouge[u][v] =0;
+                      bleu[u][v] =0;
+                      vert[u][v] =0;
+                    }
+                }
+            }
+            System.out.println("Effasage");
+            
+            rouge = MorphoComplexe.filtreMedian(rouge, 3);
+            bleu = MorphoComplexe.filtreMedian(bleu, 3);
+            vert = MorphoComplexe.filtreMedian(vert, 3);
+            
+            rouge = Histogramme.rehaussement(rouge, Histogramme.creeCourbeTonaleLineaireSaturation(50, 255));
+            bleu = Histogramme.rehaussement(bleu, Histogramme.creeCourbeTonaleLineaireSaturation(50, 255));
+            vert = Histogramme.rehaussement(vert, Histogramme.creeCourbeTonaleLineaireSaturation(50, 255));
+            
+            //Selection du background
+            JFileChooser choix = new JFileChooser();
+            File fichier;
+            choix.setCurrentDirectory(new File ("."));
+            CImageRGB back ;
+            if (choix.showOpenDialog(null) == JFileChooser.APPROVE_OPTION)
+            {
+                fichier = choix.getSelectedFile();
+                back = new CImageRGB(fichier); 
+                 
+            }else
+            {
+                back = null;
+                return;
+            }
+
+            //Combinaise des deux
+            int[][] rb = new int[imageRGB.getLargeur()][imageRGB.getHauteur()];
+            int[][] vb= new int[imageRGB.getLargeur()][imageRGB.getHauteur()];
+            int[][] bb= new int[imageRGB.getLargeur()][imageRGB.getHauteur()];
+            back.getMatricesRGB(rb,vb,bb);
+            for (int u = 0; u < rb.length ; u++) 
+            {
+                for (int v = 0; v < rb[0].length; v++) 
+                {
+                   if(rouge[u][v] ==0 && bleu[u][v] ==00 && vert[u][v] == 00)
+                   {
+                       rouge[u][v]= rb[u][v];
+                       bleu[u][v] = bb[u][v];
+                       vert[u][v] = vb[u][v];
+                   } 
+                }
+            }
+            
+            imageRGB.setMatricesRGB(rouge,vert,bleu);
+            observer.setCImage(imageRGB);
+            
+        }
+        catch(Exception e)
+        {
+            JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_Point6ItemActionPerformed
+
+    private void Point62ItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Point62ItemActionPerformed
+       if (imageRGB == null) 
+        {
+            JOptionPane.showMessageDialog(this, "No color image loaded.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        try{
+            int[][] rouge = new int[imageRGB.getLargeur()][imageRGB.getHauteur()];
+            int[][] vert= new int[imageRGB.getLargeur()][imageRGB.getHauteur()];
+            int[][] bleu= new int[imageRGB.getLargeur()][imageRGB.getHauteur()];
+            imageRGB.getMatricesRGB(rouge, vert, bleu);
+            int[][] gris = imageRGB.getCImageNG().getMatrice();
+            
+            //grand Vesseau
+            int[][] outline = Seuillage.seuillageSimple(gris, 25);
+            outline = MorphoComplexe.filtreMedian(outline, 3);
+            
+            int[][] grandV = MorphoElementaire.fermeture(gris,41);
+            grandV = Seuillage.seuillageAutomatique(grandV);
+            grandV = MorphoComplexe.reconstructionGeodesique(grandV, outline, 3);
+            System.out.println("Grand vesseaux");
+            
+            //text 
+            int[][] textImg = ContoursNonLineaire.gradientErosion(gris);
+            textImg = Seuillage.seuillageSimple(textImg, 254);
+            textImg = MorphoComplexe.filtreMedian(textImg, 3);
+            textImg = MorphoElementaire.dilatation(textImg, 225);
+                        System.out.println("text");
+            
+            //suprrimer le grand vesseaux et le texte
+            for (int u = 0; u < gris.length; u++) 
+            {
+                for (int v = 0; v < gris[0].length; v++) 
+                {
+                    if(textImg[u][v] == 255 || grandV[u][v] == 255)
+                    {
+                      rouge[u][v] =0;
+                      bleu[u][v] =0;
+                      vert[u][v] =0;
+                    }
+                }
+            }
+            System.out.println("Effasage");
+            
+            rouge = MorphoComplexe.filtreMedian(rouge, 3);
+            bleu = MorphoComplexe.filtreMedian(bleu, 3);
+            vert = MorphoComplexe.filtreMedian(vert, 3);
+            
+            rouge = Histogramme.rehaussement(rouge, Histogramme.creeCourbeTonaleLineaireSaturation(50, 255));
+            bleu = Histogramme.rehaussement(bleu, Histogramme.creeCourbeTonaleLineaireSaturation(50, 255));
+            vert = Histogramme.rehaussement(vert, Histogramme.creeCourbeTonaleLineaireSaturation(50, 255));
+            
+            //Surligner le vaisseau
+            int[][] highlight = Seuillage.seuillageSimple(rouge, 5);
+            highlight = MorphoElementaire.dilatation(highlight, 3);
+            
+            //Combiné la surline et vaisseau
+            for (int u = 0; u < rouge.length ; u++) 
+            {
+                for (int v = 0; v < rouge[0].length; v++) 
+                {
+                   if(rouge[u][v] ==0 && bleu[u][v] ==00 && vert[u][v] == 00)
+                   {
+                       rouge[u][v] = highlight[u][v];
+                   } 
+                }
+            }
+            
+            //Selection du background
+            JFileChooser choix = new JFileChooser();
+            File fichier;
+            choix.setCurrentDirectory(new File ("."));
+            CImageRGB back ;
+            if (choix.showOpenDialog(null) == JFileChooser.APPROVE_OPTION)
+            {
+                fichier = choix.getSelectedFile();
+                back = new CImageRGB(fichier); 
+                 
+            }else
+            {
+                back = null;
+                return;
+            }
+
+            //Combinaise des deux
+            int[][] rb = new int[imageRGB.getLargeur()][imageRGB.getHauteur()];
+            int[][] vb= new int[imageRGB.getLargeur()][imageRGB.getHauteur()];
+            int[][] bb= new int[imageRGB.getLargeur()][imageRGB.getHauteur()];
+            back.getMatricesRGB(rb,vb,bb);
+            for (int u = 0; u < rb.length ; u++) 
+            {
+                for (int v = 0; v < rb[0].length; v++) 
+                {
+                   if(rouge[u][v] ==0 && bleu[u][v] ==00 && vert[u][v] == 00)
+                   {
+                       rouge[u][v]= rb[u][v];
+                       bleu[u][v] = bb[u][v];
+                       vert[u][v] = vb[u][v];
+                   } 
+                }
+            }
+            
+            imageRGB.setMatricesRGB(rouge,vert,bleu);
+            observer.setCImage(imageRGB);
+            
+        }
+        catch(Exception e)
+        {
+            JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_Point62ItemActionPerformed
+
+    private void Partie7ItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Partie7ItemActionPerformed
+       if (imageRGB == null) 
+        {
+            JOptionPane.showMessageDialog(this, "No color image loaded.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        try{
+            int[][] rouge = new int[imageRGB.getLargeur()][imageRGB.getHauteur()];
+            int[][] vert= new int[imageRGB.getLargeur()][imageRGB.getHauteur()];
+            int[][] bleu= new int[imageRGB.getLargeur()][imageRGB.getHauteur()];
+            imageRGB.getMatricesRGB(rouge, vert, bleu);
+            int[][] gris = imageRGB.getCImageNG().getMatrice();
+
+            int[][] lightoff = Seuillage.seuillageSimple(gris, 252);
+            lightoff = MorphoElementaire.erosion(lightoff, 5);
+            lightoff = MorphoElementaire.dilatation(lightoff, 7);
+            int[][] main = gris;
+            
+            for (int u = 0; u < lightoff.length; u++) 
+            {
+                for (int v = 0; v < lightoff[0].length; v++) 
+                {
+                    if(lightoff[u][v] == 1)
+                    {
+                        main[u][v] = 128;
+                    }
+                }
+            }
+            
+            main =  FiltrageLineaireLocal.filtreMoyenneur(main,5);
+            main = ContoursNonLineaire.gradientDilatation(main);
+            main = Seuillage.seuillageAutomatique(main);
+            main = MorphoComplexe.filtreMedian(main, 5);
+            
+            for (int u = 0; u < gris.length; u++) 
+            {
+                for (int v = 0; v < gris[0].length; v++) 
+                {
+                    if(main[u][v] == 255)
+                    {
+                        vert[u][v] = 255;
+                    }
+                }
+            }
+            
+            imageRGB.setMatricesRGB(rouge,vert,bleu);
+            observer.setCImage(imageRGB);
+            
+        }
+        catch(Exception e)
+        {
+            JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_Partie7ItemActionPerformed
+
+    private void Partie1ItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Partie1ItemActionPerformed
+       if (imageNG == null) 
+        {
+            JOptionPane.showMessageDialog(this, "No grayscale image loaded.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        try
+        {
+                int[][] imgFiltrer = FiltrageLineaireLocal.filtreMoyenneur(imageNG.getMatrice(),5);
+                imageNG.setMatrice(imgFiltrer);
+                observer.setCImage(imageNG);
+                System.out.println("end");
+        }
+        catch(Exception e)
+        {
+            JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        
+    }//GEN-LAST:event_Partie1ItemActionPerformed
     
     /**
      * @param args the command line arguments
@@ -2060,6 +2537,7 @@ public class IsilImageProcessing extends javax.swing.JFrame implements ClicListe
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem AfficheItem2;
+    private javax.swing.JMenuItem BleuItem;
     private javax.swing.JMenuItem DilGeoItem;
     private javax.swing.JMenuItem DilatationItem;
     private javax.swing.JMenuItem EgalisationItem;
@@ -2069,12 +2547,19 @@ public class IsilImageProcessing extends javax.swing.JFrame implements ClicListe
     private javax.swing.JMenuItem LNLItem;
     private javax.swing.JMenuItem Laplace4ITem;
     private javax.swing.JMenuItem Laplace8Item;
+    private javax.swing.JMenuItem LumEgalItem;
     private javax.swing.JMenuItem MedItem;
     private javax.swing.JMenuItem MoyenneurItem;
     private javax.swing.JMenuItem NegatifItem;
     private javax.swing.JMenuItem OuvertureItem;
+    private javax.swing.JMenuItem Partie1Item;
+    private javax.swing.JMenuItem Partie7Item;
+    private javax.swing.JMenuItem Point62Item;
+    private javax.swing.JMenuItem Point6Item;
     private javax.swing.JMenuItem PrewittItem;
+    private javax.swing.JMenuItem RGBEgalItem;
     private javax.swing.JMenuItem RecGeoItem;
+    private javax.swing.JMenuItem RougeItem;
     private javax.swing.JMenuItem SaturationItem;
     private javax.swing.JMenuItem SeuilAutoItem;
     private javax.swing.JMenuItem SeuillageItem;
@@ -2089,6 +2574,14 @@ public class IsilImageProcessing extends javax.swing.JFrame implements ClicListe
     private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItemDessinerPixel;
     private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItemDessinerRectangle;
     private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItemDessinerRectanglePlein;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu10;
+    private javax.swing.JMenu jMenu11;
+    private javax.swing.JMenu jMenu12;
+    private javax.swing.JMenu jMenu13;
+    private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenu jMenuComplexe;
